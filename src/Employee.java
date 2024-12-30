@@ -13,6 +13,7 @@ public class Employee {
 		
 	}
 
+	// Getters και Setters
 
 	public String getName() {
 		return name;
