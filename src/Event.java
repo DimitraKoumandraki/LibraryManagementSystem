@@ -10,7 +10,7 @@ public class Event {
     private int maxCapacity;
     private int day, month, year;
     private int hour, minutes;
-    private int duration;
+    private int duration;//minutes
     private Organizer organizer;
     private String status;
 
