@@ -25,16 +25,8 @@ public class Reservation {
 		this.event = event;
 	}
 	
-	/*public static void main(String[] args) {
-	       
-		Visitor visitor = new Visitor("John", "Doe", "john.doe@example.com");
 		
-		Reservation reservation = new Reservation(visitor, null);
-		  
-		System.out.println("Visitor:" + reservation.getVisitor().getName());
-		
-	}*/
-	
+
 	
 	
 	
