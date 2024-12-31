@@ -17,12 +17,12 @@ public class Organizer {
         this.description = description;
         this.events = new ArrayList<>();
     }
-/*
+
     public void addEvent(Event event) {
         this.events.add(event);
     }
 
     public void removeEvent(Event event) {
         this.events.remove(event);
-    } */
+    }
 }
