@@ -22,7 +22,8 @@ public class Organizer {
         this.events.add(event);
     }
 
-    public void removeEvent(Event event) {
-        this.events.remove(event);
+    //Επιστρέφει true αν το αντικείμενο αφαιρεθεί επιτυχώς και false αν το αντικείμενο δεν βρεθεί στη λίστα.
+    public boolean removeEvent(Event event) {
+        return events.remove(event);
     }
 }
