@@ -39,16 +39,16 @@ public class Main {
             500,8,3,2025,8,30,160,  org1, "Pending");
     
     Event event2 = new Event("Art Exhibition", "Art", "Modern Art Showcase",
-            "Thessaloniki Concert Hall", 200, 15, 5, 2025, 10, 0, 120, org1, "Approved");
+            "Thessaloniki Art Center", 200, 15, 5, 2025, 10, 0, 120, org1, "Approved");
     org1.addEvent(event1);
     org1.addEvent(event2);
     
 
-    Event event3 = new Event("Jazz Festival", "Music", "Smooth Jazz Night", "Athens Jazz Club",
+    Event event3 = new Event("Jazz Festival", "Music", "Smooth Jazz Night", "Thessaloniki Concert Hall",
             300, 10, 6, 2025, 19, 30, 180, org2, "Pending");
     
     Event event4 = new Event("Theater Play", "Theater", "A classical play by local actors",
-            "Athens Theater Hall", 150, 12, 6, 2025, 18, 0, 120, org2, "Approved");
+            "Thessaloniki Concert Hall", 150, 12, 6, 2025, 18, 0, 120, org2, "Approved");
     org2.addEvent(event3);
     org2.addEvent(event4);
     
@@ -58,16 +58,16 @@ public class Main {
             "Thessaloniki Art Center", 100, 5, 7, 2025, 9, 0, 180, org3, "Pending");
     
     Event event6 = new Event("Cooking Class", "Culinary", "Learn to cook gourmet meals",
-            "Athens Culinary School", 50, 8, 7, 2025, 17, 0, 120, org3, "Approved");
+            "Makedonia Palace", 50, 8, 7, 2025, 17, 0, 120, org3, "Approved");
     org3.addEvent(event5);
     org3.addEvent(event6);
     
     
     Event event7 = new Event("Book Fair", "Literature", "Explore new and classic books",
-            "Athens City Library", 400, 20, 8, 2025, 10, 0, 240, org4, "Pending");
+            "Thessaloniki Concert Hall", 400, 20, 8, 2025, 10, 0, 240, org4, "Pending");
     
     Event event8 = new Event("Music Festival", "Music", "A festival for all music lovers",
-            "Thessaloniki Music Park", 500, 22, 8, 2025, 18, 0, 300, org4, "Approved");
+            "Thessaloniki Concert Hall", 500, 22, 8, 2025, 18, 0, 300, org4, "Approved");
     org4.addEvent(event7);
     org4.addEvent(event8);
     
