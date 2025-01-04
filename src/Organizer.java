@@ -10,6 +10,7 @@ public class Organizer {
     private String description;
     private List<Event> events;
 
+    
     public Organizer(String afm, String name, String surname, String description) {
         this.afm = afm;
         this.name = name;
@@ -17,7 +18,19 @@ public class Organizer {
         this.description = description;
         this.events = new ArrayList<>();
     }
+    
+    public String getAfm() {
+        return afm;
+    }
 
+    public void setAfm(String afm) {
+        this.afm = afm;
+    }
+    
+    
+    
+    
+    
     public void addEvent(Event event) {
         this.events.add(event);
     }
