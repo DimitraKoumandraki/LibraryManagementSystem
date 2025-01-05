@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -92,7 +94,20 @@ public class Main {
     emp3.handleApprovalRequest(deleteRequest1, "Approved", "Η εκδήλωση αφαιρέθηκε επιτυχώς.");
     emp1.handleApprovalRequest(deleteRequest2, "Approved", "Η εκδήλωση αφαιρέθηκε επιτυχώς.");
 
+    
+    //Αποθήκευση του txt στο αρχείο
+    String stringToWrite = "Java files";
+    try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("event-agenda.txt"));
+        writer.write(stringToWrite);
+        writer.close();
+        System.out.println("Το αρχείο 'event-agenda.txt' δημιουργήθηκε επιτυχώς.");
+    } catch (IOException e) { 
+        System.out.println("Δημιουργήθηκε σφάλμα κατά την εγγραφή στο αρχειο.");
+        e.printStackTrace();
 
+    }
+    
 
     //Για να διαγράψω μια εκδήλωση απο τους άλλους δύο διοργανωτές πρέπει πρώτα να προσθέσω σε αυτούς κάποια εκδήλωση
     org3.addEvent(new Event("Photography Workshop", "Art", "Learn the basics of photography",
