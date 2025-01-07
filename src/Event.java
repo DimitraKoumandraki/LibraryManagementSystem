@@ -13,6 +13,8 @@ public class Event {
     private int duration;//minutes
     private Organizer organizer;
     private String status;
+    private int currentReservations = 0; // Τρέχουσες κρατήσεις
+
 
     public Event(String title, String theme, String description, String location, int maxCapacity, int day, int month, int year, int hour, int minutes, int duration, Organizer organizer, String status) {
         this.title = title;
@@ -28,6 +30,21 @@ public class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
+
+    
+    }
+   // Αυτή η μέθοδος ελέγχει αν υπάρχουν διαθέσιμες κρατήσεις
+    public boolean hasAvailableSeats() {
+        return currentReservations < maxCapacity;
+    }
+
+    // Μέθοδος για προσθήκη κράτησης
+    public boolean makeReservation() {
+        if (hasAvailableSeats()) {
+            currentReservations++;
+            return true;
+        }
+        return false; // Επιστροφή false αν δεν υπάρχουν διαθέσιμες θέσεις
     }
 
 	public String getTitle() {
@@ -135,3 +152,4 @@ public class Event {
 	}
 
 }
+
