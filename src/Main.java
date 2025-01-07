@@ -67,8 +67,21 @@ public class Main {
  
      Event event8 = new Event("Science Fair - Discover the Future", "Science", "Explore interactive exhibits and talks from leading scientists.",
             "Thessaloniki Science Center", 500, 22, 8, 2025, 18, 0, 300, org4, "Approved");
+     
+     
+      // Δημιουργία event με μικρή χωρητικότητα για δοκιμή 
+      Event limitedEvent = new Event("Exclusive Art Tour", "Art", "VIP tour of the art gallery.", "Thessaloniki Art Center", 2, 1, 1, 2025, 10, 0, 120, org1, "Approved");
 
-            List<Event> allEvents = Arrays.asList(event1, event2, event3, event4, event5, event6, event7, event8);
+      // Δοκιμή κρατήσεων
+      Visitor visitor1 = visitors.get(0);
+      Visitor visitor2 = visitors.get(1);
+      Visitor visitor3 = visitors.get(2);
+
+      visitor1.makeReservation(limitedEvent); // Επιτυχής κράτηση
+      visitor2.makeReservation(limitedEvent); // Επιτυχής κράτηση
+      visitor3.makeReservation(limitedEvent); // Αποτυχία: Δεν υπάρχουν διαθέσιμες θέσεις
+
+           List<Event> allEvents = Arrays.asList(event1, event2, event3, event4, event5, event6, event7, event8);
 
       // Δημιουργία αιτημάτων προσθήκης
       ApprovalRequest addRequest1 = new ApprovalRequest("add", event1, org1, LocalDateTime.now());
@@ -151,7 +164,7 @@ public class Main {
            if (!dayInput.isBlank()) {
             day = Integer.parseInt(dayInput);  // Αν υπάρχει τιμή, την αποθηκεύουμε στην day
 
-            // Ζήτηση για τον μήνα αν η ημέρα είναι έγκυρη
+         // Ζήτηση για τον μήνα αν η ημέρα είναι έγκυρη
             System.out.print("Enter month (1-12): ");
             String monthInput = scanner.nextLine();
 
@@ -267,6 +280,8 @@ public class Main {
         }
        
     }
+    
+
 }
 
 
