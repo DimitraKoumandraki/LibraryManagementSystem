@@ -42,7 +42,7 @@ public class Visitor {
 
 
 //Πραγματοποιεί αναζήτηση στη δεδομένη λίστα με βάση: θέμα, τοποθεσία ή τίτλος.
-//Εάν ένα κριτήριο είναι άκυρο, θα αγνοηθεί στην αναζήτηση.
+//Εάν ένα κριτήριο είναι κενό, θα αγνοηθεί στην αναζήτηση.
 //Επιστρέφει μια λίστα που ταιριάζει με τα κριτήρια.
 
     public static List<Event> searchByCriteria(List<Event> events, Integer day, Integer month, Integer year, String location, String theme) {
