@@ -58,14 +58,14 @@ public class Main {
      Event event5 = new Event("Startup Expo - Innovation and Networking", "Business", "Meet the most innovative startups and network with entrepreneurs.",
             " Thessaloniki International Fair", 100, 5, 7, 2025, 9, 0, 180, org3, "Pending");
 
-     Event event6 = new Event("Classical Music Concert - Beethoven's Symphony", " Music", "An orchestra performing Beethoven's greatest symphonies.",
+     Event event6 = new Event("Classical Music Concert - Beethoven's Symphony", "Music", "An orchestra performing Beethoven's greatest symphonies.",
             "Thessaloniki Concert Hall", 50, 8, 7, 2025, 17, 0, 120, org3, "Approved");
 
 
      Event event7 = new Event("Marathon - Run for a Cause", "Sports", "Participate in a marathon to support a charity.",
             "Thessaloniki Waterfront", 400, 20, 8, 2025, 10, 0, 240, org4, "Pending");
  
-     Event event8 = new Event("Science Fair - Discover the Future", "Science", "Explore interactive exhibits and talks from leading scientists.",
+     Event event8 = new Event("Science Fair - Discover the Future", "Art", "Explore interactive exhibits and talks from leading scientists.",
             "Thessaloniki Science Center", 500, 22, 8, 2025, 18, 0, 300, org4, "Approved");
      
      
