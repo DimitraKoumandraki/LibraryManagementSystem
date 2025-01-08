@@ -183,7 +183,7 @@ public class Main {
 
 
          // Εκτέλεση αναζήτησης βάσει των κριτηρίων
-         List<Event> searchResults = Visitor.searchByCriteria(allEvents, day, month, year, location, theme);
+         List<Event> searchResults = Event_Services.searchByCriteria(allEvents, day, month, year, location, theme);
 
          // Εκτύπωση αποτελεσμάτων
          System.out.println("Αποτελέσματα:");
