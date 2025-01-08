@@ -46,6 +46,15 @@ public class Event {
         }
         return false; // Επιστροφή false αν δεν υπάρχουν διαθέσιμες θέσεις
     }
+    
+    //Μέθοδος για ακύρωση κράτησης
+    public boolean cancelReservation() {
+        if (currentReservations > 0) {
+            currentReservations--;
+            return true;
+        }
+        return false;
+    }
 
 	public String getTitle() {
 		return title;
