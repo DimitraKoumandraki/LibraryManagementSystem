@@ -145,11 +145,11 @@ public class Main {
         // Ζητούμε από τον χρήστη να εισάγει τα κριτήρια για τα event
         System.out.println("Εισάγετε τα κριτήρια αναζήτησης. Αφήστε το πεδίο κενό για να παραλείψετε κάποιο κριτήριο.");
 
-        System.out.print("Theme (e.g., Art, Music): ");
+        System.out.print("Theme (e.g., Fashion, Music): ");
         String theme = scanner.nextLine();
         if (theme.isBlank()) theme = null;
 
-        System.out.print("Location (e.g., Athens, Thessaloniki): ");
+        System.out.print("Location (e.g Thessaloniki): ");
         String location = scanner.nextLine();
         if (location.isBlank()) location = null;
 
