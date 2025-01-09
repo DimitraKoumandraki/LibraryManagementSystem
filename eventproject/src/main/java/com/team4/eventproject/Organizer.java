@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 
 public class Organizer {
 	
+	/**
+	  Η κλάση Organizer αναπαριστά έναν διοργανωτή εκδηλώσεων που θα μπορεί να κάνει
+	  προσθήκη εκδηλώσεων,αφαίρεση εκδηλώσεων,δημιουργία αιτημάτων έγκρισης για νέες εκδηλώσεις.
+	 */
+	
 	private String afm;
     private String name;
     private String surname;
