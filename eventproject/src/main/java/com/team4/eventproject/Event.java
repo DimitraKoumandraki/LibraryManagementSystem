@@ -35,28 +35,7 @@ public class Event {
 
     
     }
-   // Αυτή η μέθοδος ελέγχει αν υπάρχουν διαθέσιμες κρατήσεις
-    public boolean hasAvailableSeats() {
-        return currentReservations < maxCapacity;
-    }
-
-    // Μέθοδος για προσθήκη κράτησης
-    public boolean makeReservation() {
-        if (hasAvailableSeats()) {
-            currentReservations++;
-            return true;
-        }
-        return false; // Επιστροφή false αν δεν υπάρχουν διαθέσιμες θέσεις
-    }
-    
-    //Μέθοδος για ακύρωση κράτησης
-    public boolean cancelReservation() {
-        if (currentReservations > 0) {
-            currentReservations--;
-            return true;
-        }
-        return false;
-    }
+   
 
 	public String getTitle() {
 		return title;
@@ -160,6 +139,12 @@ public class Event {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public int getCurrentReservations() {
+		return currentReservations;
+	}
+	public void setCurrentReservations(int currentReservations) {
+		this.currentReservations = currentReservations;
 	}
 
 }
