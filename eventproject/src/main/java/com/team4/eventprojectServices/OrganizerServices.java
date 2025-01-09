@@ -29,7 +29,7 @@ public class OrganizerServices {
                 + organizer.getName() + " " + organizer.getSurname() + ".");
     }
 
-    // Αφαίρεση εκδήλωσης
+    // Αφαίρεση μίας εκδήλωσης
     public boolean removeEvent(Event event) {
         boolean removed = organizer.getEvents().remove(event);
         if (removed) {
