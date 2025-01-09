@@ -8,6 +8,7 @@ public class EventServices {
 	/*Πραγματοποιεί αναζήτηση στη δεδομένη λίστα με βάση: θέμα, τοποθεσία ή τίτλος.
 	Εάν ένα κριτήριο είναι κενό, θα αγνοηθεί στην αναζήτηση.
 	Επιστρέφει μια λίστα που ταιριάζει με τα κριτήρια.*/
+	
 
 	    public static List<Event> searchByCriteria(List<Event> events, Integer day, Integer month, Integer year, String location, String theme) {
 	        List<Event> result = new ArrayList<>();
@@ -33,7 +34,7 @@ public class EventServices {
 	            }
 	        }
 	        return result;
-	    }
-	}
+	   }
+}
 
 
