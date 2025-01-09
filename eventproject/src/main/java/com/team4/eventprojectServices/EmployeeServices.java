@@ -10,7 +10,8 @@ import com.team4.eventproject.Employee;
 
 public class EmployeeServices {
 	
-	
+
+
 	
 	 private List<ApprovalRequest> pendingRequests = new ArrayList<>();
 
@@ -61,5 +62,5 @@ public class EmployeeServices {
 	        }
 	        System.out.println("Η εκδήλωση " + event.getTitle() + " δεν υπάρχει.");
 	        return false;
-	    }
+	    } 
 }

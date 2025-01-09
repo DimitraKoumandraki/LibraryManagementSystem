@@ -66,5 +66,14 @@ public class Organizer {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
+	
+
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    public boolean removeEvent(Event event) {
+        return events.remove(event);
+    }
        
 }
