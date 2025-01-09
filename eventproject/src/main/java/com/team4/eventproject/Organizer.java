@@ -66,36 +66,5 @@ public class Organizer {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-
-	
-	public ApprovalRequest requestAddEvent(Event event) {
-	    System.out.println("Ο οργανωτής " + name + " ζήτησε έγκριση για τη δημιουργία της εκδήλωσης " + event.getTitle());
-	    return new ApprovalRequest("Add", event, this, LocalDateTime.now());
-	}
-	
-	
-	public void addEvent(Event event) {
-        this.events.add(event);
-        System.out.println("Η εκδήλωση \"" + event.getTitle() + "\" προστέθηκε από τον διοργανωτή " 
-                + this.name + " " + this.surname + ".");
-    }
-
-	
-	 // Προσπαθεί να αφαιρέσει την εκδήλωση από την λίστα εκδηλώσεων
-    public boolean removeEvent(Event event) {
-        
-    	  boolean removed = this.events.remove(event);
-    	    if (removed) {
-    	        // Αν η εκδήλωση αφαιρέθηκε επιτυχώς
-    	        System.out.println("Η εκδήλωση " + event.getTitle() + " αφαιρέθηκε επιτυχώς.");
-    	    } else {
-    	        // Αν η εκδήλωση δεν βρέθηκε στη λίστα
-    	        System.out.println("Η εκδήλωση " + event.getTitle() + " δεν βρέθηκε.");
-    	    }
-    	    return removed; // Επιστρέφει true αν αφαιρέθηκε, αλλιώς false
-         
-      
-    }
-    
-   
+       
 }
