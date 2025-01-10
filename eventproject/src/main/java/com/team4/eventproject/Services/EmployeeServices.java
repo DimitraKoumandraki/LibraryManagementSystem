@@ -14,11 +14,39 @@ public class EmployeeServices {
 
 	// Δήλωση της λίστας υπαλλήλων
 	private List<Employee> employees;
+	private List<Event> allEvents;
+	private List<Organizer> organizers;
+	
+ 
 
 	// Constructor για την αρχικοποίηση
 	public EmployeeServices() {
+		
+		allEvents = new ArrayList<>();
+	    organizers = new ArrayList<>();
 		employees = new ArrayList<>(); // Αρχικοποίηση της λίστας
+		
+		Organizer org1 = new Organizer("Αλέξανδρος", "Ιωάννου", "afm1", "Οργανωτής Συναυλιών");
+		Organizer org2 = new Organizer("Ελένη", "Χατζηγεωργίου", "afm2", "Οργανωτής Θεάτρων");
+		
+		Event event1 = new Event("Fashion Show - Fall Collection", "Fashion",
+				"A stunning presentation of the latest fall trends.", "Thessaloniki Art Center", 300, 10, 6, 2025, 19,
+				30, 180, org2, "Pending");
 
+		Event event2 = new Event("Yoga Retreat - Wellness and Relaxation", "Health",
+				"A weekend of yoga, meditation, and relaxation.", "Thessaloniki Concert Hall", 150, 12, 6, 2025, 18, 0,
+				120, org2, "Approved");
+
+
+        org1.addEvent(event1);
+        org2.addEvent(event2);
+
+        allEvents.add(event1);
+        allEvents.add(event2);
+        organizers.add(org1);
+        organizers.add(org2);
+        
+        
 		// Προσθήκη mock δεδομένων
 		employees.add(new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com"));
 		employees.add(new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com"));
@@ -30,6 +58,10 @@ public class EmployeeServices {
 	 // Μέθοδος για την επιστροφή όλων των υπαλλήλων
     public List<Employee> getAllEmployees() {
         return employees;
+    }
+    
+    public List<Event> getAllEvents() {
+        return allEvents;
     }
 
     // Μέθοδος για την προσθήκη νέου υπαλλήλου
