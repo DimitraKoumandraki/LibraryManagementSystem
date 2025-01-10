@@ -1,6 +1,4 @@
 package com.team4.eventproject;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Visitor {
 	 private String name;
@@ -39,7 +37,6 @@ public class Visitor {
      public void setEmail(String email) {
          this.email = email;
      }
-
 
 
 

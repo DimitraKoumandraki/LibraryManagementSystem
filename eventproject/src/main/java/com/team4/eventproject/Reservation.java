@@ -1,8 +1,6 @@
 package com.team4.eventproject;
 
 
-import java.util.List;
-
 public class Reservation {
 	private Visitor visitor;
 	private Event event;
@@ -28,9 +26,6 @@ public class Reservation {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-
-	
-
 
 }
 
