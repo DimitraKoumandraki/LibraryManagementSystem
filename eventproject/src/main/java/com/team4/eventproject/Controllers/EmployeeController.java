@@ -76,7 +76,7 @@ public class EmployeeController {
             @RequestParam Long eventId,
             @RequestParam Long organizerId,
             @RequestBody Employee employee) {
-        // Εύρεση Event και Organizer (Mock λογική για παράδειγμα)
+        // Εύρεση Event και Organizer 
         Event event = findEventById(eventId);
         Organizer organizer = findOrganizerById(organizerId);
 
