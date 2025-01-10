@@ -41,7 +41,7 @@ public class EmployeeController {
      * @param employee Ο υπάλληλος που επεξεργάζεται το αίτημα.
      * @return Μήνυμα επιτυχίας ή αποτυχίας.
      */
-    @PostMapping("/process-request")
+    @PostMapping("/process")
     public ResponseEntity<String> processRequest(
             @RequestBody ApprovalRequest request,
             @RequestParam String status,
