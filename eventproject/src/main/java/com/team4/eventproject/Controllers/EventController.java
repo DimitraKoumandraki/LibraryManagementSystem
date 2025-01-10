@@ -34,7 +34,8 @@ public class EventController {
 
 	private List<Event> fetchAllEvents() {
 		return null;
-	}
+		}}
+	
 	
 
-}
+
