@@ -81,25 +81,25 @@ public class EmployeeController {
 	}
 
 	/**
-	 * Mock Μέθοδος για εύρεση εκδήλωσης βάσει ID.
+	 * Μέθοδος για εύρεση εκδήλωσης βάσει ID.
 	 *
 	 * @param eventId Το ID της εκδήλωσης.
 	 * @return Το αντικείμενο Event.
 	 */
 	private Event findEventById(Long eventId) {
-		// Mock υλοποίηση
-		return new Event("Mock Event", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null,
+		// Δοκιμή
+		return new Event(" Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null,
 				"Pending");
 	}
 
 	/**
-	 * Mock Μέθοδος για εύρεση διοργανωτή βάσει ID.
+	 *  Μέθοδος για εύρεση διοργανωτή βάσει ID.
 	 *
 	 * @param organizerId Το ID του διοργανωτή.
 	 * @return Το αντικείμενο Organizer.
 	 */
 	private Organizer findOrganizerById(Long organizerId) {
-		// Mock υλοποίηση
-		return new Organizer("Mock Organizer", "Surname", "123456", "Description");
+		// Δοκιμή
+		return new Organizer(" Organizer1", "Surname", "123456", "Description");
 	}
 }
