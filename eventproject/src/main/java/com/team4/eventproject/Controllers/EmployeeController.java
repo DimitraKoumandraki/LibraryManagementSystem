@@ -16,7 +16,7 @@ import java.util.List;
  * REST Controller για τη διαχείριση λειτουργιών υπαλλήλων.
  */
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping("employees")
 public class EmployeeController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class EmployeeController {
      *
      * @return Λίστα με τα εκκρεμή αιτήματα.
      */
-    @GetMapping("/pending-requests")
+    @GetMapping("/pending")
     public List<ApprovalRequest> getPendingRequests() {
         return employeeServices.getPendingRequests();
     }
