@@ -23,12 +23,20 @@ public class EventController {
 	public List<Event> searchEvents(@RequestParam Integer day, @RequestParam Integer month, @RequestParam Integer year,
 			@RequestParam String location, @RequestParam String theme) {
 
-		List<Event> events = fetchAllEvents();
-
-		return eventServices.searchByCriteria(events, day, month, year, location, theme);
+		List<Event> allEvents = eventServices.getAllEvents();
+        return EventServices.searchByCriteria(allEvents, day, month, year, location, theme);
 	}
 
-	private List<Event> fetchAllEvents() {
-		return null;
+	//Επιστρέφει τις εκδηλώσεις που έχουν εκγριθεί
+	@GetMapping("/approved")     
+	public List<Event> getAllApprovedEvents(){
+		return eventServices.getAllApprovedEvents();
 	}
+	
+	//Επιστρέφει όλες τις εκδηλώσεις
+	@GetMapping("/all")
+	public List<Event> getAllEvents(){
+		return eventServices.getAllEvents();
+	}
+	
 }
