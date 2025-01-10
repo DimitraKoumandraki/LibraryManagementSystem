@@ -1,4 +1,4 @@
-package com.team4.eventprojectControllers;
+package com.team4.eventproject.Controllers;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team4.eventproject.Event;
-import com.team4.eventprojectServices.EventServices;
+import com.team4.eventproject.Services.EventServices;
 
 @RestController
 @RequestMapping("events")

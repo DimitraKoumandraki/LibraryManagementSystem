@@ -1,10 +1,12 @@
 package com.team4.eventproject;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class Organizer {
 	
 	/**
@@ -17,6 +19,10 @@ public class Organizer {
     private String surname;
     private String description;
     private List<Event> events;
+    
+    // Default constructor
+    public Organizer() {
+    }
 
     
     public Organizer(String afm, String name, String surname, String description) {

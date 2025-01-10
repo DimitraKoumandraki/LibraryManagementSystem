@@ -1,9 +1,12 @@
-package com.team4.eventprojectServices;
+package com.team4.eventproject.Services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.team4.eventproject.Event;
 
+@Service
 public class EventServices {
 	/*Πραγματοποιεί αναζήτηση στη δεδομένη λίστα με βάση: θέμα, τοποθεσία ή τίτλος.
 	Εάν ένα κριτήριο είναι κενό, θα αγνοηθεί στην αναζήτηση.

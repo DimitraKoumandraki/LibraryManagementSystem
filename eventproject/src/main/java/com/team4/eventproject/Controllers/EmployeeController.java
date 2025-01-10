@@ -1,13 +1,13 @@
-package com.team4.eventprojectControllers;
+package com.team4.eventproject.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.team4.eventprojectServices.EmployeeServices;
 import com.team4.eventproject.ApprovalRequest;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
+import com.team4.eventproject.Services.EmployeeServices;
 import com.team4.eventproject.Employee;
 
 import java.util.List;

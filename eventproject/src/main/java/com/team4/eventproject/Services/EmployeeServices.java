@@ -1,4 +1,4 @@
-package com.team4.eventprojectServices;
+package com.team4.eventproject.Services;
 
 import java.util.ArrayList;
 import java.util.List;

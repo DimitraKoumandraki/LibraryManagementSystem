@@ -1,12 +1,14 @@
-package com.team4.eventprojectServices;
+package com.team4.eventproject.Services;
 
 import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Service;
 
 import com.team4.eventproject.ApprovalRequest;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
-import com.team4.eventproject.Reservation;
 
+@Service
 public class OrganizerServices {
 	
 	//Δημιουργία organizer για την ενώση μεταξύ organizer και services

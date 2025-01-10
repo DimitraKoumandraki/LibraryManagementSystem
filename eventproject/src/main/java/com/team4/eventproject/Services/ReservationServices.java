@@ -1,12 +1,15 @@
-package com.team4.eventprojectServices;
+package com.team4.eventproject.Services;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Reservation;
 import com.team4.eventproject.Visitor;
-import java.util.ArrayList;
 
+@Service
 public class ReservationServices {
 	private static List<Reservation> reservations = new ArrayList<>();
 	
