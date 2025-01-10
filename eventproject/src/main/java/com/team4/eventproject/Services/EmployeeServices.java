@@ -12,6 +12,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServices {
 
+	// Δήλωση της λίστας υπαλλήλων
+	private List<Employee> employees;
+
+	// Constructor για την αρχικοποίηση
+	public EmployeeServices() {
+		employees = new ArrayList<>(); // Αρχικοποίηση της λίστας
+
+		// Προσθήκη mock δεδομένων
+		employees.add(new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com"));
+		employees.add(new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com"));
+		employees.add(new Employee("Νίκος", "Αντωνίου", "nikos.antoniou@example.com"));
+	}
+
+	
+	
+	 // Μέθοδος για την επιστροφή όλων των υπαλλήλων
+    public List<Employee> getAllEmployees() {
+        return employees;
+    }
+
+    // Μέθοδος για την προσθήκη νέου υπαλλήλου
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
 	// Λίστα εκκρεμών αιτημάτων
 	private List<ApprovalRequest> pendingRequests = new ArrayList<>();
 

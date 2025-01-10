@@ -21,6 +21,14 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeServices employeeServices;
+    
+    
+    
+    
+    @GetMapping("/all")
+    public List<Employee> getAllEmployees() {
+        return employeeServices.getAllEmployees();
+    }
 
     /**
      * Επιστρέφει όλα τα εκκρεμή αιτήματα.
