@@ -14,28 +14,21 @@ import com.team4.eventproject.Services.EventServices;
 @RestController
 @RequestMapping("events")
 public class EventController {
-	
-	@Autowired
-    private EventServices eventServices;
 
-    // Αναζήτηση των event βάσει των κριτηρίων
-    @GetMapping("/search")
-    public List<Event> searchEvents(
-            @RequestParam Integer day,
-            @RequestParam Integer month,
-            @RequestParam Integer year,
-            @RequestParam String location,
-            @RequestParam String theme) {
-        
-        List<Event> events = fetchAllEvents(); 
-        
-        return eventServices.searchByCriteria(events, day, month, year, location, theme);
-    }
+	@Autowired
+	private EventServices eventServices;
+
+	// Αναζήτηση των event βάσει των κριτηρίων
+	@GetMapping("/search")
+	public List<Event> searchEvents(@RequestParam Integer day, @RequestParam Integer month, @RequestParam Integer year,
+			@RequestParam String location, @RequestParam String theme) {
+
+		List<Event> events = fetchAllEvents();
+
+		return eventServices.searchByCriteria(events, day, month, year, location, theme);
+	}
 
 	private List<Event> fetchAllEvents() {
 		return null;
-		}}
-	
-	
-
-
+	}
+}
