@@ -14,7 +14,7 @@ public class Organizer {
 	  προσθήκη εκδηλώσεων,αφαίρεση εκδηλώσεων,δημιουργία αιτημάτων έγκρισης για νέες εκδηλώσεις.
 	 */
 	
-	private String afm;
+	private Integer afm;
     private String name;
     private String surname;
     private String description;
@@ -27,7 +27,7 @@ public class Organizer {
     	
     }
     
-    public Organizer(String afm, String name, String surname, String description) {
+    public Organizer(Integer afm, String name, String surname, String description) {
         this.afm = afm;
         this.name = name;
         this.surname = surname;
@@ -35,11 +35,11 @@ public class Organizer {
         this.events = new ArrayList<>(); // Αρχικοποίηση της λίστας event
     }
     
-    public String getAfm() {
+    public Integer getAfm() {
         return afm;
     }
 
-    public void setAfm(String afm) {
+    public void setAfm(Integer afm) {
         this.afm = afm;
     }
     

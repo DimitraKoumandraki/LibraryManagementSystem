@@ -141,7 +141,7 @@ public class Event {
 	public Integer getCurrentReservations() {
 		return currentReservations;
 	}
-	public void setCurrentReservations(int currentReservations) {
+	public void setCurrentReservations(Integer currentReservations) {
 		this.currentReservations = currentReservations;
 	}
 
