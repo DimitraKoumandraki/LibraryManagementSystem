@@ -41,6 +41,11 @@ public class OrganizerServices {
         }
         return removed;
     }
+    
+    //Μέθοδος όπου επιστρέφει null για την ευρυθμη λειτουργία του OrganizerController
+	public Object getOrganizer() {
+		return null;
+	}
 
     
 }

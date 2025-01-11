@@ -39,6 +39,11 @@ public class EventServices {
     	return events;
     }
     
+    //Μέθοδος όπου επιστρέφει null για την ευρυθμη λειτουργία του EventController
+    public List<Event> getEvent() {
+		return null;
+	}
+    
 	public static List<Event> searchByCriteria(List<Event> events, Integer day, Integer month, Integer year,
 			String location, String theme) {
 		
@@ -64,9 +69,7 @@ public class EventServices {
 					&& (theme == null || event.getTheme().equalsIgnoreCase(theme))) {
 				result.add(event);
 			}
-		}
-		
-		
+		}		
 		return result;
 	}
 }
