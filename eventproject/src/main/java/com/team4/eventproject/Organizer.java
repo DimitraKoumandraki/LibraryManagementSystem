@@ -22,15 +22,17 @@ public class Organizer {
     
     // Default constructor
     public Organizer() {
+    	
+        this.events = new ArrayList<>();
+    	
     }
-
     
     public Organizer(String afm, String name, String surname, String description) {
         this.afm = afm;
         this.name = name;
         this.surname = surname;
         this.description = description;
-        this.events = new ArrayList<>();
+        this.events = new ArrayList<>(); // Αρχικοποίηση της λίστας event
     }
     
     public String getAfm() {

@@ -40,10 +40,10 @@ public class OrganizerController {
         return "Υποβλήθηκε αίτημα έγκρισης για την εκδήλωση " + event.getTitle() + ".";
     }
 
-    /*
-    // Προβολή όλων των εκδηλώσεων του διοργανωτή
-    @GetMapping("/events")
-    public List<Event> getAllEvents() {
-        return organizerServices.getOrganizer().getEvents();
-    } */
+    
+//    // Προβολή όλων των εκδηλώσεων του διοργανωτή
+//    @GetMapping("/events")
+//    public List<Event> getAllEvents() {
+//        return organizerServices.getOrganizer().getEvents();
+//    } 
 }

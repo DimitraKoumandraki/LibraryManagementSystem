@@ -27,7 +27,7 @@ public class OrganizerServices {
     // Προσθήκη νέας εκδήλωσης
     public void addEvent(Event event) {
         organizer.getEvents().add(event);
-        System.out.println("Η εκδήλωση \"" + event.getTitle() + "\" προστέθηκε από τον διοργανωτή "
+        System.out.println("Η εκδήλωση " + event.getTitle() + " προστέθηκε από τον διοργανωτή "
                 + organizer.getName() + " " + organizer.getSurname() + ".");
     }
 
@@ -35,9 +35,9 @@ public class OrganizerServices {
     public boolean removeEvent(Event event) {
         boolean removed = organizer.getEvents().remove(event);
         if (removed) {
-            System.out.println("Η εκδήλωση \"" + event.getTitle() + "\" αφαιρέθηκε επιτυχώς.");
+            System.out.println("Η εκδήλωση " + event.getTitle() + " αφαιρέθηκε επιτυχώς.");
         } else {
-            System.out.println("Η εκδήλωση \"" + event.getTitle() + "\" δεν βρέθηκε.");
+            System.out.println("Η εκδήλωση " + event.getTitle() + " δεν βρέθηκε.");
         }
         return removed;
     }
