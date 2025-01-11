@@ -7,16 +7,16 @@ public class Event {
     private String theme;
     private String description;
     private String location;
-    private int maxCapacity;
-    private int day, month, year;
-    private int hour, minutes;
-    private int duration;//minutes
+    private Integer maxCapacity;
+    private Integer day, month, year;
+    private Integer hour, minutes;
+    private Integer duration;//minutes
     private Organizer organizer;
     private String status;
-    private int currentReservations = 0; // Τρέχουσες κρατήσεις
+    private Integer currentReservations = 0; // Τρέχουσες κρατήσεις
 
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, int day, int month, int year, int hour, int minutes, int duration, Organizer organizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, Integer duration, Organizer organizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -67,7 +67,7 @@ public class Event {
 		this.location = location;
 	}
 
-	public int getMaxCapacity() {
+	public Integer getMaxCapacity() {
 		return maxCapacity;
 	}
 
@@ -75,7 +75,7 @@ public class Event {
 		this.maxCapacity = maxCapacity;
 	}
 
-	public int getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
@@ -83,7 +83,7 @@ public class Event {
 		this.day = day;
 	}
 
-	public int getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
@@ -91,7 +91,7 @@ public class Event {
 		this.month = month;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
@@ -99,7 +99,7 @@ public class Event {
 		this.year = year;
 	}
 
-	public int getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
@@ -107,7 +107,7 @@ public class Event {
 		this.hour = hour;
 	}
 
-	public int getMinutes() {
+	public Integer getMinutes() {
 		return minutes;
 	}
 
@@ -115,7 +115,7 @@ public class Event {
 		this.minutes = minutes;
 	}
 
-	public int getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
 
@@ -138,7 +138,7 @@ public class Event {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getCurrentReservations() {
+	public Integer getCurrentReservations() {
 		return currentReservations;
 	}
 	public void setCurrentReservations(int currentReservations) {
