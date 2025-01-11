@@ -26,8 +26,8 @@ public class EmployeeServices {
 	    organizers = new ArrayList<>();
 		employees = new ArrayList<>(); // Αρχικοποίηση της λίστας
 		
-		Organizer org1 = new Organizer("Αλέξανδρος", "Ιωάννου", "afm1", "Οργανωτής Συναυλιών");
-		Organizer org2 = new Organizer("Ελένη", "Χατζηγεωργίου", "afm2", "Οργανωτής Θεάτρων");
+		Organizer org1 = new Organizer();
+		Organizer org2 = new Organizer();
 		
 		Event event1 = new Event("Fashion Show - Fall Collection", "Fashion",
 				"A stunning presentation of the latest fall trends.", "Thessaloniki Art Center", 300, 10, 6, 2025, 19,

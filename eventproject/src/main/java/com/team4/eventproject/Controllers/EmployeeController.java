@@ -100,6 +100,6 @@ public class EmployeeController {
 	 */
 	private Organizer findOrganizerById(Long organizerId) {
 		// Δοκιμή
-		return new Organizer(" Organizer1", "Surname", "123456", "Description");
+		return new Organizer();
 	}
 }
