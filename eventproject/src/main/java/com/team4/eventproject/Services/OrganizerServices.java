@@ -15,7 +15,7 @@ public class OrganizerServices {
     private Organizer organizer;
 
     public OrganizerServices(Organizer organizer) {
-        this.organizer = organizer;
+        this.organizer =  organizer;
     }
 
     // Έγκριση για την δημιουργία της
@@ -42,9 +42,9 @@ public class OrganizerServices {
         return removed;
     }
     
-    //Μέθοδος όπου επιστρέφει null για την ευρυθμη λειτουργία του OrganizerController
-	public Object getOrganizer() {
-		return null;
+    //Μέθοδος όπου επιστρέφει Organizer
+	public Organizer getOrganizer() {
+		return organizer;
 	}
 
     
