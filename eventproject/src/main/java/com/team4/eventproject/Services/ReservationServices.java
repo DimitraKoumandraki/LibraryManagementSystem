@@ -18,10 +18,10 @@ public class ReservationServices {
 	public ReservationServices() {
 		reservations = new ArrayList<>();
 		// Mock δεδομένα κρατήσεων
-		reservations.add(new Reservation(new Visitor("John", "Doe", "john.doe@example.com",1L),
+		reservations.add(new Reservation(new Visitor("John", "Doe", "john.doe@example.com", 1L),
 				new Event("Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
 						"Thessaloniki International Fair", 500, 8, 3, 2025, 8, 30, 160, null, "Pending")));
-		reservations.add(new Reservation(new Visitor("Jane", "Smith", "jane.smith@example.com",2L),
+		reservations.add(new Reservation(new Visitor("Jane", "Smith", "jane.smith@example.com", 2L),
 				new Event("Wine Tasting - Local Vineyards", "Culinary",
 						"Discover the finest wines from local vineyards.", " Thessaloniki Wine Cellar", 200, 15, 5,
 						2025, 10, 0, 120, null, "Approved")));
@@ -109,4 +109,17 @@ public class ReservationServices {
 		return false; // Επιστροφή false αν δεν υπάρχουν διαθέσιμες θέσεις
 	}
 
+	// Αναζήτηση κράτησης μέσω ID
+	// ->Ελέγχει αν το ID της κράτησης (reservation.getId()) ταιριάζει με το
+	// reservationId που δίνεται ως είσοδος.
+	// ->Επιστρέφει το αντικείμενο Reservation αν βρεθεί.
+	public Reservation findReservationById(Long reservationId) {
+		for (Reservation reservation : reservations) {
+			if (reservation.getId().equals(reservationId)) {
+				return reservation; // Επιστροφή της κράτησης αν βρεθεί
+			}
+		}
+		System.out.println("Η κράτηση με ID " + reservationId + " δεν βρέθηκε.");
+		return null; // Επιστροφή null αν δεν βρεθεί κράτηση
+	}
 }

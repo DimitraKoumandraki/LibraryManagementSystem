@@ -16,6 +16,8 @@ import com.team4.eventproject.Event;
 import com.team4.eventproject.Reservation;
 import com.team4.eventproject.Visitor;
 import com.team4.eventproject.Services.ReservationServices;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("reservations")
@@ -34,6 +36,22 @@ public class ReservationController {
 	@GetMapping("/by-visitor")
 	public List<Reservation> getReservationsByVisitor(@RequestParam String visitorEmail) {
 		return reservationServices.getReservationsByVisitor(visitorEmail);
+	}
+
+	/**
+	 * Αναζήτηση κράτησης μέσω ID.
+	 *
+	 * @param id Το ID της κράτησης.
+	 * @return Η κράτηση αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
+	 */
+	@GetMapping("/id")
+	public ResponseEntity<?> findReservationById(@PathVariable Long id) {
+		Reservation reservation = reservationServices.findReservationById(id);
+		if (reservation != null) {
+			return ResponseEntity.ok(reservation);
+		} else {
+			return ResponseEntity.badRequest().body("Η κράτηση με ID " + id + " δεν βρέθηκε.");
+		}
 	}
 
 	/**
