@@ -145,4 +145,10 @@ public class Event {
 		this.currentReservations = currentReservations;
 	}
 
+
+	public Object getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
