@@ -12,14 +12,16 @@ public class Employee {
 	private String name;
 	private String surname;
 	private String email;
+	 private Long id;
 
 	
 
-	public Employee(String name, String surname, String email) {
+	public Employee(String name, String surname, String email,Long id) {
 		
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
+        this.id = id;
 		
 	}
 
@@ -52,6 +54,11 @@ public class Employee {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Object getId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
    }  

@@ -9,6 +9,8 @@ import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
 import com.team4.eventproject.Services.EmployeeServices;
 import com.team4.eventproject.Employee;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +28,34 @@ public class EmployeeController {
 	public List<Employee> getAllEmployees() {
 		return employeeServices.getAllEmployees();
 	}
-
+	/**
+	 * Αναζήτηση υπαλλήλου μέσω ID.
+	 *
+	 * @param id Το ID του υπαλλήλου.
+	 * @return Υπάλληλο αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
+	 */
+	   @GetMapping("/id")
+	    public ResponseEntity<?> findEmployeeById(@PathVariable Long id) {
+	        Employee employee = employeeServices.findEmployeeById(id);
+	        if (employee != null) {
+	            return ResponseEntity.ok(employee);
+	        } else {
+	            return ResponseEntity.badRequest().body("Employee with ID " + id + " not found.");
+	        }
+	    }
+	   
+	   /**
+		 * Προσθήκη υπαλλήλου.
+		 *
+		 * @param employee ,νέος υπάλληλος για προσθήκη.
+		 * @return Μήνυμα επτυχίας.
+		 */
+	   @PostMapping
+	    public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
+	        employeeServices.addEmployee(employee);
+	        return ResponseEntity.ok("Employee added successfully.");
+	    }
+	
 	/**
 	 * Επιστρέφει όλα τα εκκρεμή αιτήματα.
 	 *

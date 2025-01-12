@@ -16,19 +16,17 @@ public class EmployeeServices {
 	private List<Employee> employees;
 	private List<Event> allEvents;
 	private List<Organizer> organizers;
-	
- 
 
 	// Constructor για την αρχικοποίηση
 	public EmployeeServices() {
-		
+
 		allEvents = new ArrayList<>();
-	    organizers = new ArrayList<>();
+		organizers = new ArrayList<>();
 		employees = new ArrayList<>(); // Αρχικοποίηση της λίστας
-		
+
 		Organizer org1 = new Organizer();
 		Organizer org2 = new Organizer();
-		
+
 		Event event1 = new Event("Fashion Show - Fall Collection", "Fashion",
 				"A stunning presentation of the latest fall trends.", "Thessaloniki Art Center", 300, 10, 6, 2025, 19,
 				30, 180, org2, "Pending");
@@ -37,37 +35,44 @@ public class EmployeeServices {
 				"A weekend of yoga, meditation, and relaxation.", "Thessaloniki Concert Hall", 150, 12, 6, 2025, 18, 0,
 				120, org2, "Approved");
 
+		org1.addEvent(event1);
+		org2.addEvent(event2);
 
-        org1.addEvent(event1);
-        org2.addEvent(event2);
+		allEvents.add(event1);
+		allEvents.add(event2);
+		organizers.add(org1);
+		organizers.add(org2);
 
-        allEvents.add(event1);
-        allEvents.add(event2);
-        organizers.add(org1);
-        organizers.add(org2);
-        
-        
 		// Προσθήκη mock δεδομένων
-		employees.add(new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com"));
-		employees.add(new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com"));
-		employees.add(new Employee("Νίκος", "Αντωνίου", "nikos.antoniou@example.com"));
+		employees.add(new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com", 1L));
+		employees.add(new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com", 2L));
+		employees.add(new Employee("Νίκος", "Αντωνίου", "nikos.antoniou@example.com", 3L));
 	}
 
-	
-	
-	 // Μέθοδος για την επιστροφή όλων των υπαλλήλων
-    public List<Employee> getAllEmployees() {
-        return employees;
-    }
-    
-    public List<Event> getAllEvents() {
-        return allEvents;
-    }
+	// Μέθοδος για την επιστροφή όλων των υπαλλήλων
+	public List<Employee> getAllEmployees() {
+		return employees;
+	}
 
-    // Μέθοδος για την προσθήκη νέου υπαλλήλου
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-    }
+	public List<Event> getAllEvents() {
+		return allEvents;
+	}
+
+	// Αναζήτηση υπαλλήλου μέσω ID
+	public Employee findEmployeeById(Long id) {
+		for (Employee employee : employees) {
+			if (employee.getId().equals(id)) {
+				return employee; // Επιστροφή του υπαλλήλου αν βρεθεί
+			}
+		}
+		System.out.println("Ο υπάλληλος με ID " + id + " δεν βρέθηκε.");
+		return null; // Επιστροφή null αν δεν βρεθεί υπάλληλος
+	}
+
+	// Μέθοδος για την προσθήκη νέου υπαλλήλου
+	public void addEmployee(Employee employee) {
+		employees.add(employee);
+	}
 
 	// Λίστα εκκρεμών αιτημάτων
 	private List<ApprovalRequest> pendingRequests = new ArrayList<>();
