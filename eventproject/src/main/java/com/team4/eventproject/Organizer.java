@@ -5,45 +5,47 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class Organizer {
-	
-	/**
-	  Η κλάση Organizer αναπαριστά έναν διοργανωτή εκδηλώσεων που θα μπορεί να κάνει
-	  προσθήκη εκδηλώσεων,αφαίρεση εκδηλώσεων,δημιουργία αιτημάτων έγκρισης για νέες εκδηλώσεις.
-	 */
-	
-	private Integer afm;
-    private String name;
-    private String surname;
-    private String description;
-    private List<Event> events;
-    
-    // Default constructor
-    public Organizer() {
-    	
-        this.events = new ArrayList<>();
-    	
-    }
-    
-    public Organizer(Integer afm, String name, String surname, String description) {
-        this.afm = afm;
-        this.name = name;
-        this.surname = surname;
-        this.description = description;
-        this.events = new ArrayList<>(); // Αρχικοποίηση της λίστας event
-    }
-    
-    public Integer getAfm() {
-        return afm;
-    }
 
-    public void setAfm(Integer afm) {
-        this.afm = afm;
-    }
-    
-    public String getName() {
+	/**
+	 * Η κλάση Organizer αναπαριστά έναν διοργανωτή εκδηλώσεων που θα μπορεί να
+	 * κάνει προσθήκη εκδηλώσεων,αφαίρεση εκδηλώσεων,δημιουργία αιτημάτων έγκρισης
+	 * για νέες εκδηλώσεις.
+	 */
+
+	private Integer afm;
+	private String name;
+	private String surname;
+	private String description;
+	private List<Event> events;
+	private Long id;
+
+	// Default constructor
+	public Organizer() {
+
+		this.events = new ArrayList<>();
+
+	}
+
+	public Organizer(Integer afm, String name, String surname, String description, Long id) {
+		this.afm = afm;
+		this.name = name;
+		this.surname = surname;
+		this.description = description;
+		this.events = new ArrayList<>(); // Αρχικοποίηση της λίστας event
+		this.id = id;
+	}
+
+	public Integer getAfm() {
+		return afm;
+	}
+
+	public void setAfm(Integer afm) {
+		this.afm = afm;
+	}
+
+	public String getName() {
 		return name;
 	}
 
@@ -74,14 +76,21 @@ public class Organizer {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-	
 
-    public void addEvent(Event event) {
-        events.add(event);
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public boolean removeEvent(Event event) {
-        return events.remove(event);
-    }
-       
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void addEvent(Event event) {
+		events.add(event);
+	}
+
+	public boolean removeEvent(Event event) {
+		return events.remove(event);
+	}
+
 }

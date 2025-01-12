@@ -1,6 +1,7 @@
 package com.team4.eventproject.Services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,22 @@ public class OrganizerServices {
 		return organizer;
 	}
 
+	// Αναζητά όλους τους διοργανωτές μέσω id
+	public Organizer findOrganizerById(Long organizerId) {
+		Organizer[] organizers = null;
+		for (Organizer organizer : organizers) {
+			if (organizer.getId().equals(organizerId)) {
+				return organizer; // Return the Organizer if found
+			}
+		}
+		System.out.println("Ο διοργανωτής με ID " + organizerId + " δεν βρέθηκε.");
+		return null; // Return null if not found
+	}
+
+	public List<Organizer> getAllOrganizers() {
+		return getAllOrganizers();
+	}
+
 	// Αναζήτηση εκδήλωσης μέσω ID
 	public Event findEventById(Long eventId) {
 		for (Event event : organizer.getEvents()) {
@@ -57,6 +74,11 @@ public class OrganizerServices {
 		}
 		System.out.println("Η εκδήλωση με ID " + eventId + " δεν βρέθηκε.");
 		return null;
+	}
+
+	public void addOrganizer(Organizer organizer2) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
