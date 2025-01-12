@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.team4.eventproject.Visitor;
 import com.team4.eventproject.Services.VisitorServices;
@@ -17,22 +19,36 @@ import com.team4.eventproject.Services.VisitorServices;
 public class VisitorControllers {
 	@Autowired
 	private VisitorServices visitorServices;
-	
-	//Επιστρέφει όλους τους Επισκέπτες 
-	
+
+	// Επιστρέφει όλους τους Επισκέπτες
+
 	@GetMapping("/all")
-	public List<Visitor>getAllVisitors(){
+	public List<Visitor> getAllVisitors() {
 		return visitorServices.getAllVisitors();
 	}
+
+	/**
+	 * Αναζήτηση επισκέπτη μέσω ID.
+	 *
+	 * @param id Το ID του επισκέπτη.
+	 * @return Ο επισκέπτης αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
+	 */
+	@GetMapping("/id")
+	public ResponseEntity<?> findVisitorById(@PathVariable Long id) {
+		Visitor visitor = visitorServices.findVisitorById(id);
+		if (visitor != null) {
+			return ResponseEntity.ok(visitor);
+		} else {
+			return ResponseEntity.badRequest().body("Ο επισκέπτης με ID " + id + " δεν βρέθηκε.");
+		}
+	}
+
 	// Προσθέτει έναν νέο επισκέπτη
 
 	@PostMapping("/add")
 	public String addvisitor(@RequestBody Visitor visitor) {
 		visitorServices.addVisitor(visitor);
-		return"Ο Επισκέπτης προστέθηκε";
+		return "Ο Επισκέπτης προστέθηκε";
 	}
-	
-	
-	
 
 }
