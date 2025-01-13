@@ -3,7 +3,9 @@ package com.team4.eventproject.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,24 +23,33 @@ public class EventController {
 	// Αναζήτηση των event βάσει των κριτηρίων
 	@GetMapping("/search")
 	public List<Event> searchEvents(@RequestParam(required = false) Integer day,
-            @RequestParam(required = false) Integer month,
-            @RequestParam(required = false) Integer year,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String theme) {
+			@RequestParam(required = false) Integer month, @RequestParam(required = false) Integer year,
+			@RequestParam(required = false) String location, @RequestParam(required = false) String theme) {
 
-List<Event> allEvents = eventServices.getAllEvents();
-return EventServices.searchByCriteria(allEvents, day, month, year, location, theme); }
+		List<Event> allEvents = eventServices.getAllEvents();
+		return EventServices.searchByCriteria(allEvents, day, month, year, location, theme);
+	}
 
-	//Επιστρέφει τις εκδηλώσεις που έχουν εκγριθεί
-	@GetMapping("/approved")     
-	public List<Event> getAllApprovedEvents(){
+	// Επιστρέφει τις εκδηλώσεις που έχουν εκγριθεί
+	@GetMapping("/approved")
+	public List<Event> getAllApprovedEvents() {
 		return eventServices.getAllApprovedEvents();
 	}
-	
-	//Επιστρέφει όλες τις εκδηλώσεις
+
+	// Επιστρέφει όλες τις εκδηλώσεις
 	@GetMapping("/all")
-	public List<Event> getAllEvents(){
+	public List<Event> getAllEvents() {
 		return eventServices.getAllEvents();
 	}
-	
+
+	@GetMapping("/id")
+	public ResponseEntity<?> getEventById(@PathVariable Long id) {
+		Event event = eventServices.findEventById(id);
+		if (event != null) {
+			return ResponseEntity.ok(event);
+		} else {
+			return ResponseEntity.status(404).body("Η εκδήλωση δεν βρέθηκε.");
+		}
+	}
+
 }
