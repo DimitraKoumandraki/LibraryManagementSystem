@@ -20,7 +20,7 @@ public class EventServices {
 
 	public EventServices() {
 
-		// for demostrations purposes
+		// προσθήλη 4 events για τον έλεγχο της λειτουργίας του κώδικα
 		events.add(new Event("Event1", "Music1", " POP", "Location1", 300, 1, 1, 2028, 20, 0, 150, null, "Approved"));
 		events.add(new Event("Event2", "concert", " Rock", "Location2", 390, 4, 4, 2025, 22, 0, 123, null, "Approved"));
 		events.add(new Event("Event3", "Music2", " Pop", "Location1", 300, 1, 1, 2028, 20, 0, 150, null, "Rending"));

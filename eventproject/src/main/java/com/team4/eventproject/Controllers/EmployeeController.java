@@ -28,8 +28,8 @@ public class EmployeeController {
 	public List<Employee> getAllEmployees() {
 		return employeeServices.getAllEmployees();
 	}
+	
 	// Αναζήτηση υπαλλήλου μέσω ID.
-
 	@GetMapping("/id")
 	public ResponseEntity<?> findEmployeeById(@PathVariable Long id) {
 		Employee employee = employeeServices.findEmployeeById(id);
@@ -41,7 +41,6 @@ public class EmployeeController {
 	}
 
 	// Προσθήκη υπαλλήλου.
-
 	@PostMapping
 	public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
 		employeeServices.addEmployee(employee);
@@ -68,7 +67,6 @@ public class EmployeeController {
 	}
 
 	// Διαγράφει μια εκδήλωση απευθείας.
-
 	@DeleteMapping("/delete-event")
 	public ResponseEntity<String> deleteEventDirectly(@RequestParam Long eventId, @RequestParam Long organizerId,
 			@RequestBody Employee employee) {
@@ -88,8 +86,8 @@ public class EmployeeController {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	// Μέθοδος για εύρεση εκδήλωσης βάσει ID.
-
 	private Event findEventById(Long eventId) {
 		// Δοκιμή
 		return new Event(" Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null, "Pending");
