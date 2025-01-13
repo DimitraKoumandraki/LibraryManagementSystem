@@ -80,7 +80,7 @@ public class OrganizerController {
 	}
 
 	// Προβολή όλων των εκδηλώσεων του διοργανωτή
-	@GetMapping("/events")
+	@GetMapping("/allevents")
 	public List<Event> getAllEvents() {
 		return organizerServices.getOrganizer().getEvents();
 	}
