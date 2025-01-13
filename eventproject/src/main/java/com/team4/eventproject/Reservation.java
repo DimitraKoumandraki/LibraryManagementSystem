@@ -3,7 +3,8 @@ package com.team4.eventproject;
 public class Reservation {
 	private Visitor visitor;
 	private Event event;
-	private Long id; // Μοναδικό ID κράτησης
+	private Long id;
+	private String Status; // Μοναδικό ID κράτησης
 
 	
 	//constructor για την δηιουργια κρατησης με εναν visitor και ενα event
@@ -17,8 +18,15 @@ public class Reservation {
         this.visitor = visitor;
         this.event = event;
         this.id = id;
+        this.Status = "Active";
     }
+    
 
+	public String getStatus() {
+		return Status;
+	}
+	
+	
 	public Visitor getVisitor() {
 		return visitor;
 	}
@@ -41,6 +49,10 @@ public class Reservation {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public void setStatus(String status2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

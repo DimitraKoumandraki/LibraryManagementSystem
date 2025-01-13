@@ -76,6 +76,17 @@ public class ReservationServices {
 		return false;
 	}
 
+	private void updateReservationsForDeactivatedEvent(Event event) {
+		// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
+		for (Reservation reservation : ReservationServices.getAllReservations()) {
+			if (reservation.getEvent().equals(event)) {
+				reservation.setStatus("Deactivate");
+				System.out.println("Η κράτηση του επισκέπτη " + reservation.getVisitor().getEmail()
+						+ " για την εκδήλωση " + event.getTitle() + " έχει ακυρωθεί.");
+			}
+		}
+	}
+
 // Προβολή όλων των κρατήσεων
 	public static void viewAllReservations() {
 		if (reservations.isEmpty()) {

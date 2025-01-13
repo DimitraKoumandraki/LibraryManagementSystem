@@ -35,7 +35,7 @@ public class OrganizerServices {
 
 	// Αφαίρεση μίας εκδήλωσης
 	public boolean removeEvent(Event event) {
-		boolean removed = organizer.getEvents().remove(event);
+		Boolean removed = organizer.getEvents().remove(event);
 		if (removed) {
 			System.out.println("Η εκδήλωση " + event.getTitle() + " αφαιρέθηκε επιτυχώς.");
 		} else {
