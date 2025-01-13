@@ -26,24 +26,15 @@ public class ReservationController {
 	@Autowired
 	private ReservationServices reservationServices;
 
-	/**
-	 * Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
-	 *
-	 * @param visitorEmail Το email του επισκέπτη.
-	 * @return Λίστα κρατήσεων.
-	 */
+	// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
 
 	@GetMapping("/by-visitor")
 	public List<Reservation> getReservationsByVisitor(@RequestParam String visitorEmail) {
 		return reservationServices.getReservationsByVisitor(visitorEmail);
 	}
 
-	/**
-	 * Αναζήτηση κράτησης μέσω ID.
-	 *
-	 * @param id Το ID της κράτησης.
-	 * @return Η κράτηση αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
-	 */
+	// Αναζήτηση κράτησης μέσω ID.
+
 	@GetMapping("/id")
 	public ResponseEntity<?> findReservationById(@PathVariable Long id) {
 		Reservation reservation = reservationServices.findReservationById(id);
@@ -53,14 +44,8 @@ public class ReservationController {
 			return ResponseEntity.badRequest().body("Η κράτηση με ID " + id + " δεν βρέθηκε.");
 		}
 	}
+	// Δημιουργεί μία νέα κράτηση.
 
-	/**
-	 * Δημιουργεί μία νέα κράτηση.
-	 *
-	 * @param visitor Ο επισκέπτης που κάνει την κράτηση.
-	 * @param event   Το αντικείμενο της εκδήλωσης.
-	 * @return Μήνυμα επιτυχίας ή αποτυχίας.
-	 */
 	@PostMapping("/create")
 	public ResponseEntity<String> createReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
 		boolean success = ReservationServices.createReservation(visitor, event);
@@ -70,13 +55,8 @@ public class ReservationController {
 		return ResponseEntity.badRequest().body("Αποτυχία: Δεν ήταν δυνατή η δημιουργία της κράτησης.");
 	}
 
-	/**
-	 * Ακυρώνει μία κράτηση.
-	 *
-	 * @param visitor Ο επισκέπτης που ακυρώνει την κράτηση.
-	 * @param event   Το αντικείμενο της εκδήλωσης.
-	 * @return Μήνυμα επιτυχίας ή αποτυχίας.
-	 */
+	// Ακυρώνει μία κράτηση.
+
 	@DeleteMapping("/cancel")
 	public ResponseEntity<String> cancelReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
 		boolean success = ReservationServices.cancelReservation(visitor, event);
@@ -86,22 +66,15 @@ public class ReservationController {
 		return ResponseEntity.badRequest().body("Αποτυχία: Δεν βρέθηκε κράτηση για τον επισκέπτη.");
 	}
 
-	/**
-	 * Επιστρέφει όλες τις κρατήσεις.
-	 *
-	 * @return Λίστα με όλες τις κρατήσεις.
-	 */
+	// Επιστρέφει όλες τις κρατήσεις.
+
 	@GetMapping
 	public List<Reservation> getAllReservations() {
 		return ReservationServices.getAllReservations();
 	}
 
-	/**
-	 * Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση.
-	 *
-	 * @param event Το αντικείμενο της εκδήλωσης.
-	 * @return Μήνυμα για τη διαθεσιμότητα των θέσεων.
-	 */
+	// Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση.
+
 	@GetMapping("/availability")
 	public ResponseEntity<String> checkAvailability(@RequestBody Event event) {
 		boolean hasSeats = ReservationServices.hasAvailableSeats(event);

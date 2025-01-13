@@ -27,12 +27,8 @@ public class VisitorControllers {
 		return visitorServices.getAllVisitors();
 	}
 
-	/**
-	 * Αναζήτηση επισκέπτη μέσω ID.
-	 *
-	 * @param id Το ID του επισκέπτη.
-	 * @return Ο επισκέπτης αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
-	 */
+	// Αναζήτηση επισκέπτη μέσω ID.
+
 	@GetMapping("/id")
 	public ResponseEntity<?> findVisitorById(@PathVariable Long id) {
 		Visitor visitor = visitorServices.findVisitorById(id);
