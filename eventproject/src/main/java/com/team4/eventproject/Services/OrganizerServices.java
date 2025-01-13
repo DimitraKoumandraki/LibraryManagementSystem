@@ -28,21 +28,33 @@ public class OrganizerServices {
 
 	// Προσθήκη νέας εκδήλωσης
 	public void addEvent(Event event) {
-		organizer.getEvents().add(event);
-		System.out.println("Η εκδήλωση " + event.getTitle() + " προστέθηκε από τον διοργανωτή " + organizer.getName()
-				+ " " + organizer.getSurname() + ".");
+	    // Προσθήκη του event στη λίστα του διοργανωτή
+	    organizer.getEvents().add(event);
+
+	    // Αλλαγή του status του event σε activated
+	    event.setStatus("activated");
+
+	    // Μήνυμα επιβεβαίωσης
+	    System.out.println("Η εκδήλωση " + event.getTitle() + " προστέθηκε από τον διοργανωτή " 
+	                       + organizer.getName() + " " + organizer.getSurname() + " και το status άλλαξε σε activated.");
 	}
 
-	// Αφαίρεση μίας εκδήλωσης
+
+	// Αφαίρεση μίας εκδήλωσης να αλλαζει το status
 	public boolean removeEvent(Event event) {
-		Boolean removed = organizer.getEvents().remove(event);
-		if (removed) {
-			System.out.println("Η εκδήλωση " + event.getTitle() + " αφαιρέθηκε επιτυχώς.");
-		} else {
-			System.out.println("Η εκδήλωση " + event.getTitle() + " δεν βρέθηκε.");
-		}
-		return removed;
+	    // Έλεγχος αν το event υπάρχει στη λίστα
+	    if (organizer.getEvents().contains(event)) {
+	        // Αλλαγή του status του event σε deactivated
+	        event.setStatus("deactive");
+
+	        System.out.println("Η εκδήλωση " + event.getTitle() + " έχει απενεργοποιηθεί επιτυχώς.");
+	        return true;
+	    } else {
+	        System.out.println("Η εκδήλωση " + event.getTitle() + " δεν βρέθηκε.");
+	        return false;
+	    }
 	}
+
 
 	// Μέθοδος όπου επιστρέφει Organizer
 	public Organizer getOrganizer() {

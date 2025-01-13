@@ -12,7 +12,7 @@ public class Event {
     private Integer hour, minutes;
     private Integer duration;//minutes
     private Organizer organizer;
-    private String status;
+    private String status;// active-deactivate
     private Integer currentReservations = 0; // Τρέχουσες κρατήσεις
 
 
