@@ -73,15 +73,4 @@ public class ReservationController {
 		return ReservationServices.getAllReservations();
 	}
 
-	// Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση.
-
-	@GetMapping("/availability")
-	public ResponseEntity<String> checkAvailability(@RequestBody Event event) {
-		boolean hasSeats = ReservationServices.hasAvailableSeats(event);
-		if (hasSeats) {
-			return ResponseEntity.ok("Υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.");
-		}
-		return ResponseEntity.badRequest()
-				.body("Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.");
-	}
 }

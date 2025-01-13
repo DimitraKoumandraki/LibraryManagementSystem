@@ -3,6 +3,7 @@ package com.team4.eventproject;
 
 public class Event {
 
+	private Long id;
 	private String title;
     private String theme;
     private String description;
@@ -34,6 +35,16 @@ public class Event {
     
     }
    
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	public String getTitle() {
 		return title;
@@ -146,9 +157,5 @@ public class Event {
 	}
 
 
-	public Object getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }
