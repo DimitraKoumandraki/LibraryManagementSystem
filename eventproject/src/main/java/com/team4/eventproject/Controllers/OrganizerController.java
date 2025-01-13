@@ -16,22 +16,15 @@ public class OrganizerController {
 	@Autowired
 	private OrganizerServices organizerServices;
 
-	/**
-	 * Επιστρέφει όλους τους διοργανωτές.
-	 *
-	 * @return Λίστα με όλους τους διοργανωτές.
-	 */
+	// Επιστρέφει όλους τους διοργανωτές.
+
 	@GetMapping
 	public List<Organizer> getAllOrganizers() {
 		return organizerServices.getAllOrganizers();
 	}
 
-	/**
-	 * Επιστρέφει έναν διοργανωτή βάσει του ID του.
-	 *
-	 * @param id Το ID του διοργανωτή.
-	 * @return Ο διοργανωτής αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
-	 */
+	// Επιστρέφει έναν διοργανωτή βάσει του ID του.
+
 	@GetMapping("/id")
 	public ResponseEntity<?> findOrganizerById(@PathVariable Long id) {
 		Organizer organizer = organizerServices.findOrganizerById(id);
@@ -42,12 +35,8 @@ public class OrganizerController {
 		}
 	}
 
-	/**
-	 * Προσθέτει έναν νέο διοργανωτή.
-	 *
-	 * @param organizer Ο νέος διοργανωτής που θα προστεθεί.
-	 * @return Μήνυμα επιτυχίας.
-	 */
+	// Προσθέτει έναν νέο διοργανωτή.
+
 	@PostMapping
 	public ResponseEntity<String> addOrganizer(@RequestBody Organizer organizer) {
 		organizerServices.addOrganizer(organizer);
