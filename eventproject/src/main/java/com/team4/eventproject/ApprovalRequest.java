@@ -1,7 +1,10 @@
+package com.team4.eventproject;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApprovalRequest {
-
 	private String type; // Ο τύπος είναι "add" ή "delete"
 	private Event event;
 	private Organizer submittedBy;// Ο διοργανωτής που υπέβαλλε το αίτημα
@@ -10,8 +13,9 @@ public class ApprovalRequest {
 	private Employee handledBy;// Ο υπάλληλος που διαχειρίστηκε το αίτημα
 	private LocalDateTime closedAt;// Η ημερομηνία/ώρα που ολοκληρώθηκε
 	private String comments;
+	private Long id;
 
-	public ApprovalRequest(String type, Event event, Organizer submittedBy, LocalDateTime createdAt) {
+	public ApprovalRequest(String type, Event event, Organizer submittedBy, LocalDateTime createdAt, Long id) {
 		this.type = type;
 		this.event = event;
 		this.submittedBy = submittedBy;
@@ -20,9 +24,14 @@ public class ApprovalRequest {
 		this.handledBy = null;
 		this.closedAt = null;
 		this.comments = "";
+		this.id = id;
 	}
 
 	// Getters και Setters
+
+	public ApprovalRequest(String string, Event event2, Organizer organizer, LocalDateTime now) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getType() {
 		return type;
@@ -88,6 +97,14 @@ public class ApprovalRequest {
 		this.comments = comments;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	// Μέθοδος για να κλείσει το αίτημα
 	public void closeRequest(String status, Employee handledBy, String comments) {
 		this.status = status;
@@ -95,4 +112,17 @@ public class ApprovalRequest {
 		this.comments = comments;
 		this.closedAt = LocalDateTime.now();
 	}
+	
+	//Αναζητά ένα Approval Request μέσω id από την λίστα
+
+	public static ApprovalRequest findById(List<ApprovalRequest> requests, Long id) {
+		for (ApprovalRequest request : requests) {
+			if (request.getId().equals(id)) {
+				return request; // Επιστρέφει το αίτημα αν βρεθεί
+			}
+		}
+		System.out.println("Το αίτημα με ID " + id + " δεν βρέθηκε.");
+		return null; // Επιστρέφει null αν δεν βρεθεί το αίτημα
+	}
+
 }
