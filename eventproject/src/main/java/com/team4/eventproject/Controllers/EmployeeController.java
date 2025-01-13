@@ -83,7 +83,6 @@ public class EmployeeController {
 	}
 
 	private Organizer findOrganizerById(Long organizerId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
