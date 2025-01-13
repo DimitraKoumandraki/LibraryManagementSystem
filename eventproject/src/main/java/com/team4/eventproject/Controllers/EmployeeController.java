@@ -28,53 +28,34 @@ public class EmployeeController {
 	public List<Employee> getAllEmployees() {
 		return employeeServices.getAllEmployees();
 	}
-	/**
-	 * Αναζήτηση υπαλλήλου μέσω ID.
-	 *
-	 * @param id Το ID του υπαλλήλου.
-	 * @return Υπάλληλο αν βρεθεί, διαφορετικά μήνυμα αποτυχίας.
-	 */
-	   @GetMapping("/id")
-	    public ResponseEntity<?> findEmployeeById(@PathVariable Long id) {
-	        Employee employee = employeeServices.findEmployeeById(id);
-	        if (employee != null) {
-	            return ResponseEntity.ok(employee);
-	        } else {
-	            return ResponseEntity.badRequest().body("Employee with ID " + id + " not found.");
-	        }
-	    }
-	   
-	   /**
-		 * Προσθήκη υπαλλήλου.
-		 *
-		 * @param employee ,νέος υπάλληλος για προσθήκη.
-		 * @return Μήνυμα επτυχίας.
-		 */
-	   @PostMapping
-	    public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
-	        employeeServices.addEmployee(employee);
-	        return ResponseEntity.ok("Employee added successfully.");
-	    }
-	
-	/**
-	 * Επιστρέφει όλα τα εκκρεμή αιτήματα.
-	 *
-	 * @return Λίστα με τα εκκρεμή αιτήματα.
-	 */
+	// Αναζήτηση υπαλλήλου μέσω ID.
+
+	@GetMapping("/id")
+	public ResponseEntity<?> findEmployeeById(@PathVariable Long id) {
+		Employee employee = employeeServices.findEmployeeById(id);
+		if (employee != null) {
+			return ResponseEntity.ok(employee);
+		} else {
+			return ResponseEntity.badRequest().body("Employee with ID " + id + " not found.");
+		}
+	}
+
+	// Προσθήκη υπαλλήλου.
+
+	@PostMapping
+	public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
+		employeeServices.addEmployee(employee);
+		return ResponseEntity.ok("Employee added successfully.");
+	}
+
+	// Επιστρέφει όλα τα εκκρεμή αιτήματα.
+
 	@GetMapping("/pending")
 	public List<ApprovalRequest> getPendingRequests() {
 		return employeeServices.getPendingRequests();
 	}
 
-	/**
-	 * Επεξεργάζεται ένα αίτημα.
-	 *
-	 * @param request  Το αίτημα που θα επεξεργαστεί.
-	 * @param status   Η κατάσταση του αιτήματος (Approved/Rejected).
-	 * @param comments Σχόλια για την απόφαση.
-	 * @param employee Ο υπάλληλος που επεξεργάζεται το αίτημα.
-	 * @return Μήνυμα επιτυχίας ή αποτυχίας.
-	 */
+	// Επεξεργάζεται ένα αίτημα.
 	@PostMapping("/process")
 	public ResponseEntity<String> processRequest(@RequestBody ApprovalRequest request, @RequestParam String status,
 			@RequestParam String comments, @RequestBody Employee employee) {
@@ -86,14 +67,8 @@ public class EmployeeController {
 		}
 	}
 
-	/**
-	 * Διαγράφει μια εκδήλωση απευθείας.
-	 *
-	 * @param eventId     Το ID της εκδήλωσης που θα διαγραφεί.
-	 * @param organizerId Το ID του διοργανωτή της εκδήλωσης.
-	 * @param employee    Ο υπάλληλος που εκτελεί τη διαγραφή.
-	 * @return Μήνυμα επιτυχίας ή αποτυχίας.
-	 */
+	// Διαγράφει μια εκδήλωση απευθείας.
+
 	@DeleteMapping("/delete-event")
 	public ResponseEntity<String> deleteEventDirectly(@RequestParam Long eventId, @RequestParam Long organizerId,
 			@RequestBody Employee employee) {
@@ -109,24 +84,15 @@ public class EmployeeController {
 		return ResponseEntity.badRequest().body("Η εκδήλωση ή ο διοργανωτής δεν βρέθηκαν.");
 	}
 
-	/**
-	 * Μέθοδος για εύρεση εκδήλωσης βάσει ID.
-	 *
-	 * @param eventId Το ID της εκδήλωσης.
-	 * @return Το αντικείμενο Event.
-	 */
+	// Μέθοδος για εύρεση εκδήλωσης βάσει ID.
+
 	private Event findEventById(Long eventId) {
 		// Δοκιμή
-		return new Event(" Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null,
-				"Pending");
+		return new Event(" Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null, "Pending");
 	}
 
-	/**
-	 *  Μέθοδος για εύρεση διοργανωτή βάσει ID.
-	 *
-	 * @param organizerId Το ID του διοργανωτή.
-	 * @return Το αντικείμενο Organizer.
-	 */
+	// Μέθοδος για εύρεση διοργανωτή βάσει ID.
+
 	private Organizer findOrganizerById(Long organizerId) {
 		// Δοκιμή
 		return new Organizer();
