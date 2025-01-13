@@ -84,6 +84,10 @@ public class EmployeeController {
 		return ResponseEntity.badRequest().body("Η εκδήλωση ή ο διοργανωτής δεν βρέθηκαν.");
 	}
 
+	private Organizer findOrganizerById(Long organizerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	// Μέθοδος για εύρεση εκδήλωσης βάσει ID.
 
 	private Event findEventById(Long eventId) {
@@ -91,10 +95,5 @@ public class EmployeeController {
 		return new Event(" Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null, "Pending");
 	}
 
-	// Μέθοδος για εύρεση διοργανωτή βάσει ID.
-
-	private Organizer findOrganizerById(Long organizerId) {
-		// Δοκιμή
-		return new Organizer();
-	}
+	
 }
