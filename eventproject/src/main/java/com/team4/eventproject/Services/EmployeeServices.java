@@ -27,11 +27,11 @@ public class EmployeeServices {
 		Organizer org1 = new Organizer();
 		Organizer org2 = new Organizer();
 
-		Event event1 = new Event("Fashion Show - Fall Collection", "Fashion",
+		Event event1 = new Event(1L,"Fashion Show - Fall Collection", "Fashion",
 				"A stunning presentation of the latest fall trends.", "Thessaloniki Art Center", 300, 10, 6, 2025, 19,
 				30, 180, org2, "Pending");
 
-		Event event2 = new Event("Yoga Retreat - Wellness and Relaxation", "Health",
+		Event event2 = new Event(2L,"Yoga Retreat - Wellness and Relaxation", "Health",
 				"A weekend of yoga, meditation, and relaxation.", "Thessaloniki Concert Hall", 150, 12, 6, 2025, 18, 0,
 				120, org2, "Approved");
 

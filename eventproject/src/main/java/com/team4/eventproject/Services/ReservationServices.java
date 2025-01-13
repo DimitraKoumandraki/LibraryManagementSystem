@@ -19,22 +19,22 @@ public class ReservationServices {
 		reservations = new ArrayList<>();
 		// Mock δεδομένα κρατήσεων
 		reservations.add(new Reservation(new Visitor("John", "Doe", "john.doe@example.com", 1L),
-				new Event("Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
+				new Event(1L,"Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
 						"Thessaloniki International Fair", 500, 8, 3, 2025, 8, 30, 160, null, "Pending")));
 		reservations.add(new Reservation(new Visitor("Jane", "Smith", "jane.smith@example.com", 2L),
-				new Event("Wine Tasting - Local Vineyards", "Culinary",
+				new Event(2L,"Wine Tasting - Local Vineyards", "Culinary",
 						"Discover the finest wines from local vineyards.", " Thessaloniki Wine Cellar", 200, 15, 5,
 						2025, 10, 0, 120, null, "Approved")));
 	}
 
-// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
+	// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
 	public List<Reservation> getReservationsByVisitor(String visitorEmail) {
 		return reservations.stream()
 				.filter(reservation -> reservation.getVisitor().getEmail().equalsIgnoreCase(visitorEmail))
 				.collect(Collectors.toList());
 	}
 
-// Δημιουργία κράτησης
+	// Δημιουργία κράτησης
 	public static boolean createReservation(Visitor visitor, Event event) {
 		if (!hasAvailableSeats(event)) {
 			System.out.println("Αποτυχία: Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση: " + event.getTitle());
@@ -58,7 +58,7 @@ public class ReservationServices {
 		return true;
 	}
 
-// Ακύρωση κράτησης
+	// Ακύρωση κράτησης
 	public static boolean cancelReservation(Visitor visitor, Event event) {
 		for (Reservation reservation : reservations) {
 			if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
@@ -87,7 +87,7 @@ public class ReservationServices {
 		}
 	}
 
-// Προβολή όλων των κρατήσεων
+	// Προβολή όλων των κρατήσεων
 	public static void viewAllReservations() {
 		if (reservations.isEmpty()) {
 			System.out.println("Δεν υπάρχουν κρατήσεις.");
@@ -100,18 +100,18 @@ public class ReservationServices {
 		}
 	}
 
-// Επιστρέφει όλες τις κρατήσεις
+	// Επιστρέφει όλες τις κρατήσεις
 	public static List<Reservation> getAllReservations() {
 		return reservations;
 	}
 
-// Αυτή η μέθοδος ελέγχει αν υπάρχουν διαθέσιμες κρατήσεις
+	// Αυτή η μέθοδος ελέγχει αν υπάρχουν διαθέσιμες κρατήσεις
 	public static boolean hasAvailableSeats(Event event) {
 		return event.getCurrentReservations() < event.getMaxCapacity();
 
 	}
 
-// Μέθοδος για προσθήκη κράτησης
+	// Μέθοδος για προσθήκη κράτησης
 	public boolean makeReservation(Event event) {
 		if (hasAvailableSeats(event)) {
 			event.setCurrentReservations(event.getCurrentReservations() + 1);

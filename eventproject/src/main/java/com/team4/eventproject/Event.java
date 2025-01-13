@@ -17,8 +17,9 @@ public class Event {
     private Integer currentReservations = 0; // Τρέχουσες κρατήσεις
 
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, Integer duration, Organizer organizer, String status) {
-        this.title = title;
+    public Event(Long id,String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, Integer duration, Organizer organizer, String status) {
+        this.id= id;
+    	this.title = title;
         this.theme = theme;
         this.description = description;
         this.location = location;
@@ -31,8 +32,6 @@ public class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
-
-    
     }
    
 
