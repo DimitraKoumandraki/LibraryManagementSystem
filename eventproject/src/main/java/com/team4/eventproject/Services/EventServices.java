@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.team4.eventproject.Event;
+import com.team4.eventproject.Organizer;
 
 @Service
 public class EventServices {
@@ -16,17 +17,22 @@ public class EventServices {
 	 * που ταιριάζει με τα κριτήρια.
 	 */
 
-	private List<Event> events = new ArrayList<>();
+	 List<Event> events = new ArrayList<>();
 
 	public EventServices() {
 
-		// προσθήkη 4 events για τον έλεγχο της λειτουργίας του κώδικα
-		events.add(new Event(1L,"Event1", "Music1", " POP", "Location1", 300, 1, 1, 2028, 20, 0, 150, null, "Approved"));
-		events.add(new Event(2L,"Event2", "concert", " Rock", "Location2", 390, 4, 4, 2025, 22, 0, 123, null, "Approved"));
-		events.add(new Event(3L,"Event3", "Music2", " Pop", "Location1", 300, 1, 1, 2028, 20, 0, 150, null, "Rending"));
-		events.add(
-				new Event(4L,"Event4", "Music3", " Rock n ROll", "Loc3", 190, 10, 10, 2025, 20, 0, 123, null, "Approved"));
+		// προσθήkη 2 events για τον έλεγχο της λειτουργίας του κώδικα
+		Organizer organizer1 = new Organizer(12345678, "John", "Doe", "Music event organizer",  1L);
+		
 
+		Event event1 = new Event(1L, "Concert at the Park", "Music", "Enjoy an evening of live music", "Central Park", 500, 15, 6, 2025, 20, 30, 120, organizer1, "Active");
+		Event event2 = new Event(2L, "Rock Night", "Rock", "A thrilling rock concert", "Stadium A", 800, 2, 7, 2025, 21, 0, 150, organizer1, "Active");
+
+		
+		events.add(event1);
+		events.add(event2);
+
+		organizer1.setEvents(events);  // Συνδέουμε τα events με τον οργανωτή
 	}
 
 	// Επιστρέφει τις εκδηλώσεις που έχουν εκγριθεί
@@ -43,7 +49,7 @@ public class EventServices {
 
 	// Επιστρέφει όλεςτις εκδηλώσεις
 	public List<Event> getAllEvents() {
-		return new ArrayList<>();
+		return events;
 	}
 
 	// Μέθοδος για αναζήτηση εκδήλωσης μέσω ID
@@ -56,11 +62,6 @@ public class EventServices {
 	    return null; // Επιστρέφει null αν δεν βρεθεί το event
 	}
 
-
-	// Μέθοδος όπου επιστρέφει null για την ευρυθμη λειτουργία του EventController
-	public List<Event> getEvent() {
-		return null;
-	}
 
 	public static List<Event> searchByCriteria(List<Event> events, Integer day, Integer month, Integer year,
 			String location, String theme) {

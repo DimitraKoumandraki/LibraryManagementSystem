@@ -1,17 +1,28 @@
 package com.team4.eventproject.Services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.team4.eventproject.ApprovalRequest;
+import com.team4.eventproject.Employee;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
 
 @Service
 public class OrganizerServices {
+	private List<Organizer> organizers;
 
+	public void initializeOrganizers() {
+	    organizers = new ArrayList<>();  // Αρχικοποιούμε τη λίστα
+	    
+	    // Δημιουργία ενός οργανωτή και προσθήκη στη λίστα
+	    Organizer organizer1 = new Organizer(12345678, "John", "Doe", "Music event organizer", 1L);
+	    organizers.add(organizer1);
+	}
+	
 	// Δημιουργία organizer για την ένωση μεταξύ organizer και services
 	private Organizer organizer;
 
@@ -45,7 +56,7 @@ public class OrganizerServices {
 	    // Έλεγχος αν το event υπάρχει στη λίστα
 	    if (organizer.getEvents().contains(event)) {
 	        // Αλλαγή του status του event σε deactivated
-	        event.setStatus("deactive");
+	        event.setStatus("deactivated");
 
 	        System.out.println("Η εκδήλωση " + event.getTitle() + " έχει απενεργοποιηθεί επιτυχώς.");
 	        return true;
@@ -63,7 +74,6 @@ public class OrganizerServices {
 
 	// Αναζητά όλους τους διοργανωτές μέσω id
 	public Organizer findOrganizerById(Long organizerId) {
-		Organizer[] organizers = null;
 		for (Organizer organizer : organizers) {
 			if (organizer.getId().equals(organizerId)) {
 				return organizer; // Return the Organizer if found
