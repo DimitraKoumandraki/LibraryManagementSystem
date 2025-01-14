@@ -15,12 +15,16 @@ import com.team4.eventproject.Organizer;
 public class OrganizerServices {
 	private List<Organizer> organizers;
 
-	public void initializeOrganizers() {
+	public OrganizerServices() {
 	    organizers = new ArrayList<>();  // Αρχικοποιούμε τη λίστα
 	    
 	    // Δημιουργία ενός οργανωτή και προσθήκη στη λίστα
 	    Organizer organizer1 = new Organizer(12345678, "John", "Doe", "Music event organizer", 1L);
 	    organizers.add(organizer1);
+	}
+	
+	public List<Organizer> getAllOrganizers() {
+		return organizers;
 	}
 	
 	// Δημιουργία organizer για την ένωση μεταξύ organizer και services
@@ -66,7 +70,6 @@ public class OrganizerServices {
 	    }
 	}
 
-
 	// Μέθοδος όπου επιστρέφει Organizer
 	public Organizer getOrganizer() {
 		return organizer;
@@ -83,14 +86,9 @@ public class OrganizerServices {
 		return null; // Return null if not found
 	}
 
-	public List<Organizer> getAllOrganizers() {
-		return getAllOrganizers();
-	}
-
 	
       public void addOrganizer(Organizer organizer2) {
-		// TODO Auto-generated method stub
-
-	}
+    	  
+      }
 
 }

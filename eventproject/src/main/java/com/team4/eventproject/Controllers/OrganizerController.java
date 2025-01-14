@@ -19,7 +19,7 @@ public class OrganizerController {
 
 	// Επιστρέφει όλους τους διοργανωτές.
 
-	@GetMapping
+	@GetMapping("/all")
 	public List<Organizer> getAllOrganizers() {
 		return organizerServices.getAllOrganizers();
 	}
@@ -38,7 +38,7 @@ public class OrganizerController {
 
 	// Προσθέτει έναν νέο διοργανωτή.
 
-	@PostMapping
+	@PostMapping("/addOrganizer")
 	public ResponseEntity<String> addOrganizer(@RequestBody Organizer organizer) {
 		organizerServices.addOrganizer(organizer);
 		return ResponseEntity.ok("Ο διοργανωτής προστέθηκε επιτυχώς.");
