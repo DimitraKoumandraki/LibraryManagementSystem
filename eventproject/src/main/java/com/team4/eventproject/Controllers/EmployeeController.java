@@ -28,7 +28,7 @@ public class EmployeeController {
 	public List<Employee> getAllEmployees() {
 		return employeeServices.getAllEmployees();
 	}
-	
+
 	// Αναζήτηση υπαλλήλου μέσω ID.
 	@GetMapping("/id")
 	public ResponseEntity<?> findEmployeeById(@PathVariable Long id) {
@@ -56,41 +56,58 @@ public class EmployeeController {
 
 	// Επεξεργάζεται ένα αίτημα.
 	@PostMapping("/process")
-	public ResponseEntity<String> processRequest(@RequestBody ApprovalRequest request, @RequestParam String status,
-			@RequestParam String comments, @RequestBody Employee employee) {
+
+	public ResponseEntity<String> handleApprovalRequest(@RequestBody ApprovalRequest request,
+			@RequestParam String status, @RequestParam String comments, @RequestBody Employee employee) {
 		try {
-			employeeServices.processRequest(request, status, comments, employee);
+			// Κλήση της υπηρεσίας για επεξεργασία του αιτήματος
+			employeeServices.handleApprovalRequest(request, status, comments, employee);
+
+			// Επιστροφή επιτυχίας αν ολοκληρωθεί χωρίς σφάλματα
 			return ResponseEntity.ok("Το αίτημα επεξεργάστηκε επιτυχώς.");
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body("Σφάλμα: " + e.getMessage());
+		} catch (Exception e) {
+			// Επιστροφή σφάλματος αν προκύψει κάποιο πρόβλημα
+			return ResponseEntity.badRequest().body("Λάθος: " + e.getMessage());
 		}
 	}
 
 	// Διαγράφει μια εκδήλωση απευθείας.
 	@DeleteMapping("/delete-event")
-	public ResponseEntity<String> deleteEventDirectly(@RequestParam Long eventId, @RequestParam Long organizerId,
-			@RequestBody Employee employee) {
-		// Εύρεση Event και Organizer
-		Event event = findEventById(eventId);
-		Organizer organizer = findOrganizerById(organizerId);
+	public ResponseEntity<String> deleteEventDirectly(
+	       @RequestBody Event event,//Η εκδήλωση που θέλουμε να διαγράψουμε.
+	        @RequestParam Long organizerId,//Το ID του διοργανωτή της εκδήλωσης.
+	        @RequestBody Employee employee)// Ο υπάλληλος που εκτελεί τη διαγραφή.
+	{
 
-		if (event != null && organizer != null) {
-			boolean result = employeeServices.deleteEventDirectly(event, organizer, employee);
-			return result ? ResponseEntity.ok("Η εκδήλωση διαγράφηκε επιτυχώς.")
-					: ResponseEntity.badRequest().body("Η διαγραφή της εκδήλωσης απέτυχε.");
-		}
-		return ResponseEntity.badRequest().body("Η εκδήλωση ή ο διοργανωτής δεν βρέθηκαν.");
+	    // Εύρεση του διοργανωτή βάσει ID
+	    Organizer organizer = findOrganizerById(organizerId);
+
+	    // Έλεγχος αν ο διοργανωτής υπάρχει
+	    if (organizer == null) {
+	        return ResponseEntity.badRequest().body("Ο διοργανωτής με ID " + organizerId + " δεν βρέθηκε.");
+	    }
+
+	    // Εκτέλεση της διαγραφής
+	    boolean result = employeeServices.deleteEventDirectly(event, organizer, employee);
+
+	    // Επιστροφή κατάλληλου μηνύματος βάσει αποτελέσματος
+	    if (result) {
+	        return ResponseEntity.ok("Η εκδήλωση '" + event.getTitle() + "' διαγράφηκε επιτυχώς.");
+	    } else {
+	        return ResponseEntity.badRequest().body("Η εκδήλωση '" + event.getTitle() + "' δεν βρέθηκε στη λίστα του διοργανωτή.");
+	    }
 	}
 
 	private Organizer findOrganizerById(Long organizerId) {
 		return null;
 	}
-	
+
 	// Μέθοδος για εύρεση εκδήλωσης βάσει ID.
+	//Την δηλώνω τοπικά γιατί εξυπηρετεί την παραπάνω μέθοδο 
 	private Event findEventById(Long eventId) {
 		// Δοκιμή
-		return new Event(1L," Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null, "Pending");
+		return new Event(1L, " Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null,
+				"Pending");
 	}
 
-	
 }

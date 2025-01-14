@@ -27,11 +27,11 @@ public class EmployeeServices {
 		Organizer org1 = new Organizer();
 		Organizer org2 = new Organizer();
 
-		Event event1 = new Event(1L,"Fashion Show - Fall Collection", "Fashion",
+		Event event1 = new Event(1L, "Fashion Show - Fall Collection", "Fashion",
 				"A stunning presentation of the latest fall trends.", "Thessaloniki Art Center", 300, 10, 6, 2025, 19,
 				30, 180, org2, "Pending");
 
-		Event event2 = new Event(2L,"Yoga Retreat - Wellness and Relaxation", "Health",
+		Event event2 = new Event(2L, "Yoga Retreat - Wellness and Relaxation", "Health",
 				"A weekend of yoga, meditation, and relaxation.", "Thessaloniki Concert Hall", 150, 12, 6, 2025, 18, 0,
 				120, org2, "Approved");
 
@@ -104,20 +104,16 @@ public class EmployeeServices {
 	}
 
 	// Επεξεργάζεται ένα αίτημα δημιουργίας ή διαγραφής εκδηλώσεων.
+
 	public void handleApprovalRequest(ApprovalRequest request, String status, String comments, Employee employee) {
-		if (!status.equals("Approved") && !status.equals("Rejected")) {
-			throw new IllegalArgumentException("Invalid status. Use 'Approved' or 'Rejected'.");
-		}
 		// Ενημέρωση της κατάστασης του αιτήματος
 		request.closeRequest(status, employee, comments);
 
-		// Αν η κατάσταση είναι "Approved", επεξεργαζόμαστε την εκδήλωση
-		if (status.equals("Approved")) {
-			// Προσθήκη της εκδήλωσης στη λίστα του διοργανωτή
-			if (request.getType().equals("Add")) {
+		// Αν το αίτημα εγκρίθηκε, επεξεργαζόμαστε την εκδήλωση
+		if ("Approved".equalsIgnoreCase(status)) {
+			if ("Add".equalsIgnoreCase(request.getType())) {
 				request.getSubmittedBy().addEvent(request.getEvent());
-			} else if (request.getType().equals("Delete")) {
-				// Διαγραφή της εκδήλωσης από τη λίστα του διοργανωτή
+			} else if ("Delete".equalsIgnoreCase(request.getType())) {
 				request.getSubmittedBy().removeEvent(request.getEvent());
 			}
 		}
@@ -125,18 +121,11 @@ public class EmployeeServices {
 
 	// Διαγράφει μία εκδήλωση απευθείας από τη λίστα ενός διοργανωτή.
 	public boolean deleteEventDirectly(Event event, Organizer organizer, Employee employee) {
-		// Επιστρέφει μια boolean τιμή αν η εκδήλωση υπάρχει στη λίστα του διοργανωτή
-		if (organizer.getEvents().contains(event)) {
-
-			// Διαγραφή της εκδήλωση
-			boolean removed = organizer.removeEvent(event);
-			if (removed) {
-				System.out.println(
-						"Ο υπάλληλος " + employee.getName() + " διέγραψε την εκδήλωση " + event.getTitle() + ".");
-			}
-			return removed;
+		if (!organizer.getEvents().remove(event)) {
+			System.out.println("Η εκδήλωση " + event.getTitle() + " δεν υπάρχει.");
+			return false;
 		}
-		System.out.println("Η εκδήλωση " + event.getTitle() + " δεν υπάρχει.");
-		return false;
+		System.out.println("Ο υπάλληλος " + employee.getName() + " διέγραψε την εκδήλωση " + event.getTitle() + ".");
+		return true;
 	}
 }
