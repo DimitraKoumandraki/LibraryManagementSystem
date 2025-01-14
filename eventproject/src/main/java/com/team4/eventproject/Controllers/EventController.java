@@ -94,7 +94,7 @@ public class EventController {
     }
 
     // Επιστρέφει μία εκδήλωση βάσει ID
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     public ResponseEntity<?> getEventById(@PathVariable Long id) {
         Event event = eventServices.findEventById(id);
         if (event != null) {
@@ -105,7 +105,7 @@ public class EventController {
     }
 
     // Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση
-    @GetMapping("/{id}/availability")
+    @GetMapping("/id/availability")
     public ResponseEntity<String> checkAvailability(@PathVariable Long id) {
         // Αναζητούμε την εκδήλωση με το συγκεκριμένο ID
         Event event = eventServices.findEventById(id);
