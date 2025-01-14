@@ -36,7 +36,7 @@ public class EmployeeController {
 		if (employee != null) {
 			return ResponseEntity.ok(employee);
 		} else {
-			return ResponseEntity.badRequest().body("Employee with ID " + id + " not found.");
+			return ResponseEntity.badRequest().body("Ο υπάλληλος με " + id + " δεν βρέθηκε.");
 		}
 	}
 
@@ -44,7 +44,7 @@ public class EmployeeController {
 	@PostMapping
 	public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
 		employeeServices.addEmployee(employee);
-		return ResponseEntity.ok("Employee added successfully.");
+		return ResponseEntity.ok("Ο υπάλληλος προστέθηκε με επιτυχία.");
 	}
 
 	// Επιστρέφει όλα τα εκκρεμή αιτήματα.
