@@ -19,10 +19,10 @@ public class ReservationServices {
 		reservations = new ArrayList<>();
 		// Mock δεδομένα κρατήσεων
 		reservations.add(new Reservation(new Visitor("John", "Doe", "john.doe@example.com", 1L),
-				new Event(1L,"Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
+				new Event(1L, "Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
 						"Thessaloniki International Fair", 500, 8, 3, 2025, 8, 30, 160, null, "Pending")));
 		reservations.add(new Reservation(new Visitor("Jane", "Smith", "jane.smith@example.com", 2L),
-				new Event(2L,"Wine Tasting - Local Vineyards", "Culinary",
+				new Event(2L, "Wine Tasting - Local Vineyards", "Culinary",
 						"Discover the finest wines from local vineyards.", " Thessaloniki Wine Cellar", 200, 15, 5,
 						2025, 10, 0, 120, null, "Approved")));
 	}
@@ -34,48 +34,48 @@ public class ReservationServices {
 				.collect(Collectors.toList());
 	}
 
-	// Δημιουργία κράτησης για τον επισκέπτη,δίνει μια λεπτομερή αναφορά για την διαδικασία της προσθήκης της κράτησης 
-	
+	// Δημιουργία κράτησης για τον επισκέπτη,δίνει μια λεπτομερή αναφορά για την
+	// διαδικασία της προσθήκης της κράτησης
+
 	public boolean createReservation(Visitor visitor, Event event) {
-	    // Ελέγχουμε αν υπάρχουν διαθέσιμες θέσεις
-	    if (!hasAvailableSeats(event)) {
-	        return false; // Αν δεν υπάρχουν διαθέσιμες θέσεις, επιστρέφουμε false
-	    }
+		// Ελέγχουμε αν υπάρχουν διαθέσιμες θέσεις
+		if (!hasAvailableSeats(event)) {
+			return false; // Αν δεν υπάρχουν διαθέσιμες θέσεις, επιστρέφουμε false
+		}
 
-	    // Ελέγχουμε αν ο επισκέπτης έχει ήδη κάνει κράτηση για την εκδήλωση
-	    for (Reservation reservation : reservations) {
-	        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
-	            return false; // Ο επισκέπτης έχει ήδη κράτηση για αυτή την εκδήλωση
-	        }
-	    }
+		// Ελέγχουμε αν ο επισκέπτης έχει ήδη κάνει κράτηση για την εκδήλωση
+		for (Reservation reservation : reservations) {
+			if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
+				return false; // Ο επισκέπτης έχει ήδη κράτηση για αυτή την εκδήλωση
+			}
+		}
 
-	    // Αν δεν υπήρξε κράτηση, προσθέτουμε μια νέα κράτηση
-	    event.setCurrentReservations(event.getCurrentReservations() + 1);
-	    Reservation newReservation = new Reservation(visitor, event);
-	    reservations.add(newReservation);
+		// Αν δεν υπήρξε κράτηση, προσθέτουμε μια νέα κράτηση
+		event.setCurrentReservations(event.getCurrentReservations() + 1);
+		Reservation newReservation = new Reservation(visitor, event);
+		reservations.add(newReservation);
 
-	    return true; // Η κράτηση ολοκληρώθηκε επιτυχώς
+		return true; // Η κράτηση ολοκληρώθηκε επιτυχώς
 	}
-
 
 	// Ακύρωση κράτησης
 	public boolean cancelReservation(Visitor visitor, Event event) {
-	    for (Reservation reservation : reservations) {
-	        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
-	            // Ενημερώνουμε το status σε "Deactivated"
-	            reservation.setStatus("Deactivated");
+		for (Reservation reservation : reservations) {
+			if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
+				// Ενημερώνουμε το status σε "Deactivated"
+				reservation.setStatus("Deactivated");
 
-	            // Μειώνουμε τις τρέχουσες κρατήσεις της εκδήλωσης
-	            event.setCurrentReservations(event.getCurrentReservations() - 1);
+				// Μειώνουμε τις τρέχουσες κρατήσεις της εκδήλωσης
+				event.setCurrentReservations(event.getCurrentReservations() - 1);
 
-	            System.out.println("Η κράτηση για την εκδήλωση " + event.getTitle() + " ακυρώθηκε.");
-	            return true;
-	        }
-	    }
-	    System.out.println("Αποτυχία: Δεν υπάρχει κράτηση για τον επισκέπτη " + visitor.getName() + " στην εκδήλωση: " + event.getTitle());
-	    return false;
+				System.out.println("Η κράτηση για την εκδήλωση " + event.getTitle() + " ακυρώθηκε.");
+				return true;
+			}
+		}
+		System.out.println("Αποτυχία: Δεν υπάρχει κράτηση για τον επισκέπτη " + visitor.getName() + " στην εκδήλωση: "
+				+ event.getTitle());
+		return false;
 	}
-
 
 	private void updateReservationsForDeactivatedEvent(Event event) {
 		// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
@@ -112,7 +112,8 @@ public class ReservationServices {
 
 	}
 
-	// Μέθοδος που χρησιμοποιείται όταν θέλουμε να αυξήσουμε τον αριθμό κρατήσεων μιας εκδήλωσης
+	// Μέθοδος που χρησιμοποιείται όταν θέλουμε να αυξήσουμε τον αριθμό κρατήσεων
+	// μιας εκδήλωσης
 	public boolean makeReservation(Event event) {
 		if (hasAvailableSeats(event)) {
 			event.setCurrentReservations(event.getCurrentReservations() + 1);
@@ -122,9 +123,9 @@ public class ReservationServices {
 	}
 
 	// Αναζήτηση κράτησης μέσω ID
-	// ->Ελέγχει αν το ID της κράτησης (reservation.getId()) ταιριάζει με το
+	// Ελέγχει αν το ID της κράτησης (reservation.getId()) ταιριάζει με το
 	// reservationId που δίνεται ως είσοδος.
-	// ->Επιστρέφει το αντικείμενο Reservation αν βρεθεί.
+	// Επιστρέφει το αντικείμενο Reservation αν βρεθεί.
 	public Reservation findReservationById(Long reservationId) {
 		for (Reservation reservation : reservations) {
 			if (reservation.getId().equals(reservationId)) {

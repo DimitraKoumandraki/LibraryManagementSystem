@@ -3,10 +3,6 @@ package com.team4.eventproject;
 /*Ένας υπάλληλος μπορεί ενημερώνεται για αιτήσεις προσθήκης ή διαγραφής εκδηλώσεων και
 έπειτα να τις εγκρίνει ή να τις απορρίπτει. Επίσης, θα μπορεί να διαγράψει μία τρέχουσα
 εκδήλωση.*/
-import java.util.List;
-import java.util.ArrayList;
-
-
 public class Employee {
 
 	private String name;

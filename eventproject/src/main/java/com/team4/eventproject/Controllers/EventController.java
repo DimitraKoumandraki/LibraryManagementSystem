@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +21,7 @@ public class EventController {
     @Autowired
     private EventServices eventServices;
 
-    @Autowired
-    private ReservationServices reservationServices;
+   
     
  // Αναζήτηση των event βάσει των κριτηρίων
     @GetMapping("/search")
@@ -100,7 +98,7 @@ public class EventController {
     // Επιστρέφει μία εκδήλωση βάσει ID
     @GetMapping("/{id}")
     public String getEventById(@PathVariable Long id) {
-        Event event = eventServices.findEventById(id);
+        Event event = EventServices.findEventById(id);
         if (event != null) {
             return event.toString(); // Επιστρέφει το event ως String
         } else {
@@ -110,16 +108,15 @@ public class EventController {
 
 
 
-
     // Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση
     @GetMapping("/{id}/availability")
     public String checkAvailability(@PathVariable Long id) {
-        Event event = eventServices.findEventById(id);
+        Event event = EventServices.findEventById(id);
         if (event == null) {
             return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
         }
 
-        boolean hasSeats = reservationServices.hasAvailableSeats(event);
+        boolean hasSeats = ReservationServices.hasAvailableSeats(event);
         if (hasSeats) {
             return "Υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
         }

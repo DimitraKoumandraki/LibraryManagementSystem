@@ -19,7 +19,6 @@ import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Services.ReservationServices;
 import com.team4.eventproject.Services.VisitorServices;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -87,18 +87,8 @@ public class OrganizerServices {
 		return getAllOrganizers();
 	}
 
-	/* Αναζήτηση εκδήλωσης μέσω ID
-	public Event findEventById(Long eventId) {
-		for (Event event : organizer.getEvents()) {
-			if (event.getId().equals(eventId)) {
-				return event;
-			}
-		}
-		System.out.println("Η εκδήλωση με ID " + eventId + " δεν βρέθηκε.");
-		return null;
-	}*/
-
-	public void addOrganizer(Organizer organizer2) {
+	
+      public void addOrganizer(Organizer organizer2) {
 		// TODO Auto-generated method stub
 
 	}

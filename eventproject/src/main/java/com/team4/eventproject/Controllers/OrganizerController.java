@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
+import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Services.OrganizerServices;
 
 @RestController
@@ -76,8 +77,7 @@ public class OrganizerController {
 
 	@GetMapping("/events")
 	public ResponseEntity<?> findEventById(@PathVariable Long eventId) {
-		Event event = organizerServices.findEventById(eventId);
-
+		Event event = EventServices.findEventById(eventId);
 		if (event != null) {
 			return ResponseEntity.ok(event);
 		} else {

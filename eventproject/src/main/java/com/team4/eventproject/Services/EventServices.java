@@ -11,13 +11,8 @@ import com.team4.eventproject.Organizer;
 @Service
 public class EventServices {
 
-	/*
-	 * Πραγματοποιεί αναζήτηση στη δεδομένη λίστα με βάση: θέμα, τοποθεσία ή τίτλος.
-	 * Εάν ένα κριτήριο είναι κενό, θα αγνοηθεί στην αναζήτηση. Επιστρέφει μια λίστα
-	 * που ταιριάζει με τα κριτήρια.
-	 */
 
-	 List<Event> events = new ArrayList<>();
+	 static List<Event> events = new ArrayList<>();
 
 	public EventServices() {
 
@@ -53,7 +48,7 @@ public class EventServices {
 	}
 
 	// Μέθοδος για αναζήτηση εκδήλωσης μέσω ID
-	public Event findEventById(Long eventId) {
+	public static Event findEventById(Long eventId) {
 	    for (Event event : events) {
 	        if (event.getId() != null && event.getId().equals(eventId)) {
 	            return event;
@@ -62,6 +57,11 @@ public class EventServices {
 	    return null; // Επιστρέφει null αν δεν βρεθεί το event
 	}
 
+	/*
+	 * Πραγματοποιεί αναζήτηση στη δεδομένη λίστα με βάση: θέμα, τοποθεσία ή τίτλος.
+	 * Εάν ένα κριτήριο είναι κενό, θα αγνοηθεί στην αναζήτηση. Επιστρέφει μια λίστα
+	 * που ταιριάζει με τα κριτήρια.
+	 */
 
 	public static List<Event> searchByCriteria(List<Event> events, Integer day, Integer month, Integer year,
 			String location, String theme) {
