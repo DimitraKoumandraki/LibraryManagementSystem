@@ -16,7 +16,7 @@ import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Services.ReservationServices;
 
 @RestController
-@RequestMapping("events")
+@RequestMapping("/events")
 public class EventController {
 
     @Autowired
@@ -96,11 +96,12 @@ public class EventController {
     @GetMapping("/all")
     public String getAllEvents() {
         List<Event> allEvents = eventServices.getAllEvents();
-        if (allEvents.isEmpty()) {
+        if (allEvents == null || allEvents.isEmpty()) {
             return "Δεν υπάρχουν διαθέσιμες εκδηλώσεις.";
         }
-        return allEvents.toString(); // Επιστρέφει όλα τα events
+        return allEvents.toString();
     }
+
 
 
     // Επιστρέφει μία εκδήλωση βάσει ID
