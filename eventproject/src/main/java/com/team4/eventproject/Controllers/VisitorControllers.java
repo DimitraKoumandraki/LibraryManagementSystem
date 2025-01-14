@@ -15,7 +15,7 @@ import com.team4.eventproject.Visitor;
 import com.team4.eventproject.Services.VisitorServices;
 
 @RestController
-@RequestMapping("visitors")
+@RequestMapping("/visitors")
 public class VisitorControllers {
 	@Autowired
 	private VisitorServices visitorServices;

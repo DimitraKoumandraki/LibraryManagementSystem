@@ -18,7 +18,7 @@ import java.util.List;
  * REST Controller για τη διαχείριση λειτουργιών υπαλλήλων.
  */
 @RestController
-@RequestMapping("employees")
+@RequestMapping("/employees")
 public class EmployeeController {
 
 	@Autowired

@@ -10,7 +10,7 @@ import com.team4.eventproject.Organizer;
 import com.team4.eventproject.Services.OrganizerServices;
 
 @RestController
-@RequestMapping("organizer")
+@RequestMapping("/organizer")
 public class OrganizerController {
 
 	@Autowired

@@ -16,7 +16,7 @@ import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Services.ReservationServices;
 
 @RestController
-@RequestMapping("events")
+@RequestMapping("/events")
 public class EventController {
 
     @Autowired
