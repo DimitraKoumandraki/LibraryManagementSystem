@@ -4,7 +4,7 @@ public class Reservation {
 	private Visitor visitor;
 	private Event event;
 	private Long id;
-	private String Status; // Μοναδικό ID κράτησης
+	private String Status; // active/deactivated
 
 	
 	//constructor για την δηιουργια κρατησης με εναν visitor και ενα event

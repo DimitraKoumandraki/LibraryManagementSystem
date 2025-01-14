@@ -47,36 +47,48 @@ public class ReservationController {
 
 	// Αναζήτηση κράτησης μέσω ID.
 
-	@GetMapping("/id")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<?> findReservationById(@PathVariable Long id) {
-		Reservation reservation = reservationServices.findReservationById(id);
-		if (reservation != null) {
-			return ResponseEntity.ok(reservation);
-		} else {
-			return ResponseEntity.badRequest().body("Η κράτηση με ID " + id + " δεν βρέθηκε.");
-		}
+	    Reservation reservation = reservationServices.findReservationById(id);
+	    if (reservation != null) {
+	        return ResponseEntity.ok(reservation);
+	    } else {
+	        return ResponseEntity.badRequest().body("Η κράτηση με ID " + id + " δεν βρέθηκε.");
+	    }
 	}
+
+
 	// Δημιουργεί μία νέα κράτηση.
 
-	@PostMapping("/create")
-	public ResponseEntity<String> createReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
-		boolean success = ReservationServices.createReservation(visitor, event);
-		if (success) {
-			return ResponseEntity.ok("Η κράτηση για την εκδήλωση '" + event.getTitle() + "' ολοκληρώθηκε επιτυχώς.");
-		}
-		return ResponseEntity.badRequest().body("Αποτυχία: Δεν ήταν δυνατή η δημιουργία της κράτησης.");
-	}
-
-	// Ακυρώνει μία κράτηση.
-
+//	@PostMapping("/create")
+//	public ResponseEntity<String> createReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
+//		boolean success = ReservationServices.createReservation(visitor, event);
+//		if (success) {
+//			return ResponseEntity.ok("Η κράτηση για την εκδήλωση '" + event.getTitle() + "' ολοκληρώθηκε επιτυχώς.");
+//		}
+//		return ResponseEntity.badRequest().body("Αποτυχία: Δεν ήταν δυνατή η δημιουργία της κράτησης.");
+//	}
+//
+//	// Ακυρώνει μία κράτηση.
+//
 	@DeleteMapping("/cancel")
 	public ResponseEntity<String> cancelReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
-		boolean success = ReservationServices.cancelReservation(visitor, event);
-		if (success) {
-			return ResponseEntity.ok("Η κράτηση για την εκδήλωση '" + event.getTitle() + "' ακυρώθηκε επιτυχώς.");
-		}
-		return ResponseEntity.badRequest().body("Αποτυχία: Δεν βρέθηκε κράτηση για τον επισκέπτη.");
+	    // Αντί να διαγράψουμε, θα ενημερώσουμε το status της κράτησης.
+		 for (Reservation reservation : ReservationServices.getAllReservations()) {
+	        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
+	            // Ενημερώνουμε το status σε "Deactivated"
+	            reservation.setStatus("Deactivated");
+
+	            // Μειώνουμε τις τρέχουσες κρατήσεις της εκδήλωσης
+	            event.setCurrentReservations(event.getCurrentReservations() - 1);
+
+	            System.out.println("Η κράτηση για την εκδήλωση " + event.getTitle() + " ακυρώθηκε.");
+	            return ResponseEntity.ok("Η κράτηση για την εκδήλωση '" + event.getTitle() + "' ακυρώθηκε (Status: Deactivate).");
+	        }
+	    }
+	    return ResponseEntity.badRequest().body("Αποτυχία: Δεν βρέθηκε κράτηση για τον επισκέπτη.");
 	}
+
 
 	// Επιστρέφει όλες τις κρατήσεις.
 

@@ -31,8 +31,15 @@ public class EventServices {
 
 	// Επιστρέφει τις εκδηλώσεις που έχουν εκγριθεί
 	public List<Event> getAllApprovedEvents() {
-		return events.stream().filter(event -> "Approved".equalsIgnoreCase(event.getStatus())).toList();
+	    List<Event> approvedEvents = new ArrayList<>();
+	    for (Event event : events) {
+	        if ("Approved".equalsIgnoreCase(event.getStatus())) {
+	            approvedEvents.add(event);
+	        }
+	    }
+	    return approvedEvents;
 	}
+
 
 	// Επιστρέφει όλεςτις εκδηλώσεις
 	public List<Event> getAllEvents() {

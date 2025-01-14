@@ -36,7 +36,7 @@ public class ReservationServices {
 
 	// Δημιουργία κράτησης για τον επισκέπτη,δίνει μια λεπτομερή αναφορά για την διαδικασία της προσθήκης της κράτησης 
 	
-	public static boolean createReservation(Visitor visitor, Event event) {
+	public  boolean createReservation(Visitor visitor, Event event) {
 		if (!hasAvailableSeats(event)) {
 			System.out.println("Αποτυχία: Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση: " + event.getTitle());
 			return false;
@@ -60,22 +60,23 @@ public class ReservationServices {
 	}
 
 	// Ακύρωση κράτησης
-	public static boolean cancelReservation(Visitor visitor, Event event) {
-		for (Reservation reservation : reservations) {
-			if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
-				reservations.remove(reservation);
+	public boolean cancelReservation(Visitor visitor, Event event) {
+	    for (Reservation reservation : reservations) {
+	        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
+	            // Ενημερώνουμε το status σε "Deactivated"
+	            reservation.setStatus("Deactivated");
 
-				// Μειώνουμε τις τρέχουσες κρατήσεις της εκδήλωσης
-				event.setCurrentReservations(event.getCurrentReservations() - 1);
+	            // Μειώνουμε τις τρέχουσες κρατήσεις της εκδήλωσης
+	            event.setCurrentReservations(event.getCurrentReservations() - 1);
 
-				System.out.println("Η κράτηση για την εκδήλωση " + event.getTitle() + " ακυρώθηκε.");
-				return true;
-			}
-		}
-		System.out.println("Αποτυχία: Δεν υπάρχει κράτηση για τον επισκέπτη " + visitor.getName() + " στην εκδήλωση: "
-				+ event.getTitle());
-		return false;
+	            System.out.println("Η κράτηση για την εκδήλωση " + event.getTitle() + " ακυρώθηκε.");
+	            return true;
+	        }
+	    }
+	    System.out.println("Αποτυχία: Δεν υπάρχει κράτηση για τον επισκέπτη " + visitor.getName() + " στην εκδήλωση: " + event.getTitle());
+	    return false;
 	}
+
 
 	private void updateReservationsForDeactivatedEvent(Event event) {
 		// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
