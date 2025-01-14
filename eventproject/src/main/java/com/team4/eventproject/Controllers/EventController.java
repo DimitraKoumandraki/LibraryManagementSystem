@@ -27,8 +27,7 @@ public class EventController {
     
  // Αναζήτηση των event βάσει των κριτηρίων
     @GetMapping("/search")
-    public List<Event> searchEvents(@RequestParam(required = false) Long id,
-                                     @RequestParam(required = false) Integer day,
+    public List<Event> searchEvents(@RequestParam(required = false) Integer day,
                                      @RequestParam(required = false) Integer month,
                                      @RequestParam(required = false) Integer year,
                                      @RequestParam(required = false) String location,
@@ -38,42 +37,36 @@ public class EventController {
         List<Event> EventsAfterFilter = new ArrayList<>();
 
         for (Event event : allEvents) {
-            boolean matches = true;
+            boolean matches = false;
 
-            // Έλεγχος για το ID
-            // Id είναι το μόνο απαραίτητο για την αναζήτηση, τα υπόλοιπα πεδία μπορούν να παραληφθούν
-            if (!event.getId().equals(id)) {
-                matches = false;
-            }
-            
             // Έλεγχος για την ημέρα του event
-            if (day != null && !event.getDay().equals(day)) {
-                matches = false;
+            if (day != null && event.getDay().equals(day)) {
+                matches = true;
             }
 
             // Έλεγχος για τον μήνα
-            if (month != null && !event.getMonth().equals(month)) {
-                matches = false;
+            if (month != null && event.getMonth().equals(month)) {
+                matches = true;
             }
 
             // Έλεγχος για το έτος
-            if (year != null && !event.getYear().equals(year)) {
-                matches = false;
+            if (year != null && event.getYear().equals(year)) {
+                matches = true;
             }
 
             // Έλεγχος για την τοποθεσία
-            if (location != null && !event.getLocation().equalsIgnoreCase(location)) {
-                matches = false;
+            if (location != null && event.getLocation().equalsIgnoreCase(location)) {
+                matches = true;
             }
 
             // Έλεγχος για το θέμα
-            if (theme != null && !event.getTheme().equalsIgnoreCase(theme)) {
-                matches = false;
+            if (theme != null && event.getTheme().equalsIgnoreCase(theme)) {
+                matches = true;
             }
 
-            // Αν όλα τα κριτήρια ταιριάζουν, προσθέτουμε το event στη λίστα
+            // Αν υπάρχει ταύτιση, προσθήκη στη λίστα
             if (matches) {
-            	EventsAfterFilter.add(event);
+                EventsAfterFilter.add(event);
             }
         }
 
