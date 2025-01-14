@@ -36,28 +36,27 @@ public class ReservationServices {
 
 	// Δημιουργία κράτησης για τον επισκέπτη,δίνει μια λεπτομερή αναφορά για την διαδικασία της προσθήκης της κράτησης 
 	
-	public  boolean createReservation(Visitor visitor, Event event) {
-		if (!hasAvailableSeats(event)) {
-			System.out.println("Αποτυχία: Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση: " + event.getTitle());
-			return false;
-		}
-		for (Reservation reservation : reservations) {
-			if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
-				System.out.println(
-						"Αποτυχία: Ο επισκέπτης " + visitor.getName() + " έχει ήδη κράτηση για αυτή την εκδήλωση.");
-				return false;
-			}
-		}
+	public boolean createReservation(Visitor visitor, Event event) {
+	    // Ελέγχουμε αν υπάρχουν διαθέσιμες θέσεις
+	    if (!hasAvailableSeats(event)) {
+	        return false; // Αν δεν υπάρχουν διαθέσιμες θέσεις, επιστρέφουμε false
+	    }
 
-		event.setCurrentReservations(event.getCurrentReservations() + 1);
+	    // Ελέγχουμε αν ο επισκέπτης έχει ήδη κάνει κράτηση για την εκδήλωση
+	    for (Reservation reservation : reservations) {
+	        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
+	            return false; // Ο επισκέπτης έχει ήδη κράτηση για αυτή την εκδήλωση
+	        }
+	    }
 
-		Reservation newReservation = new Reservation(visitor, event);
-		reservations.add(newReservation);
+	    // Αν δεν υπήρξε κράτηση, προσθέτουμε μια νέα κράτηση
+	    event.setCurrentReservations(event.getCurrentReservations() + 1);
+	    Reservation newReservation = new Reservation(visitor, event);
+	    reservations.add(newReservation);
 
-		System.out.println(
-				"Επιτυχία: Ο επισκέπτης " + visitor.getName() + " έκανε κράτηση για την εκδήλωση: " + event.getTitle());
-		return true;
+	    return true; // Η κράτηση ολοκληρώθηκε επιτυχώς
 	}
+
 
 	// Ακύρωση κράτησης
 	public boolean cancelReservation(Visitor visitor, Event event) {
@@ -82,7 +81,7 @@ public class ReservationServices {
 		// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
 		for (Reservation reservation : ReservationServices.getAllReservations()) {
 			if (reservation.getEvent().equals(event)) {
-				reservation.setStatus("Deactivate");
+				reservation.setStatus("Deactivated");
 				System.out.println("Η κράτηση του επισκέπτη " + reservation.getVisitor().getEmail()
 						+ " για την εκδήλωση " + event.getTitle() + " έχει ακυρωθεί.");
 			}

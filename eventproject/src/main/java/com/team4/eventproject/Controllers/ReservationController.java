@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Reservation;
 import com.team4.eventproject.Visitor;
+import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Services.ReservationServices;
+import com.team4.eventproject.Services.VisitorServices;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +26,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/reservations")
 public class ReservationController {
 
-	@Autowired
-	private ReservationServices reservationServices;
+	 @Autowired
+	    private ReservationServices reservationServices;
 
+	    @Autowired
+	    private VisitorServices visitorServices;  // Προσθήκη VisitorServices
+	    @Autowired
+	    private EventServices eventServices;
+	    
 	// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
 
 	@GetMapping("/by-visitor")
@@ -59,18 +67,33 @@ public class ReservationController {
 
 
 	// Δημιουργεί μία νέα κράτηση.
+	@PostMapping("/create")
+    public ResponseEntity<String> createReservation(@RequestParam Long visitorId, @RequestParam Long eventId) {
+        // Αναζητούμε τον Visitor και το Event μέσω των id
+        Visitor visitor = visitorServices.findVisitorById(visitorId);  // Χρησιμοποιούμε τον VisitorServices για να βρούμε τον Visitor
+        Event event = eventServices.findEventById(eventId);
 
-//	@PostMapping("/create")
-//	public ResponseEntity<String> createReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
-//		boolean success = ReservationServices.createReservation(visitor, event);
-//		if (success) {
-//			return ResponseEntity.ok("Η κράτηση για την εκδήλωση '" + event.getTitle() + "' ολοκληρώθηκε επιτυχώς.");
-//		}
-//		return ResponseEntity.badRequest().body("Αποτυχία: Δεν ήταν δυνατή η δημιουργία της κράτησης.");
-//	}
-//
-//	// Ακυρώνει μία κράτηση.
-//
+        // Αν δεν βρεθεί ο Visitor ή το Event, επιστρέφουμε σφάλμα
+        if (visitor == null) {
+            return ResponseEntity.badRequest().body("Δεν βρέθηκε επισκέπτης με το ID " + visitorId);
+        }
+
+        if (event == null) {
+            return ResponseEntity.badRequest().body("Δεν βρέθηκε εκδήλωση με το ID " + eventId);
+        }
+
+        // Καλούμε την υπηρεσία για τη δημιουργία της κράτησης
+        boolean success = reservationServices.createReservation(visitor, event);
+
+        // Επιστρέφουμε την κατάλληλη απάντηση
+        if (success) {
+            return ResponseEntity.ok("Η κράτηση για την εκδήλωση '" + event.getTitle() + "' ολοκληρώθηκε επιτυχώς.");
+        } else {
+            return ResponseEntity.badRequest().body("Αποτυχία: Δεν ήταν δυνατή η δημιουργία της κράτησης.");
+        }
+    }
+
+	
 	@DeleteMapping("/cancel")
 	public ResponseEntity<String> cancelReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
 	    // Αντί να διαγράψουμε, θα ενημερώσουμε το status της κράτησης.
