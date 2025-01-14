@@ -36,18 +36,19 @@ public class EventServices {
 
 	// Επιστρέφει όλεςτις εκδηλώσεις
 	public List<Event> getAllEvents() {
-		return events;
+		return new ArrayList<>();
 	}
 
 	// Μέθοδος για αναζήτηση εκδήλωσης μέσω ID
 	public Event findEventById(Long eventId) {
-		for (Event event : events) {
-			if (event.getId().equals(eventId)) {
-				return event;
-			}
-		}
-		return null; // Επιστρέφει null αν δεν βρεθεί η εκδήλωση
+	    for (Event event : events) {
+	        if (event.getId() != null && event.getId().equals(eventId)) {
+	            return event;
+	        }
+	    }
+	    return null; // Επιστρέφει null αν δεν βρεθεί το event
 	}
+
 
 	// Μέθοδος όπου επιστρέφει null για την ευρυθμη λειτουργία του EventController
 	public List<Event> getEvent() {

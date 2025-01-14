@@ -16,7 +16,7 @@ import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Services.ReservationServices;
 
 @RestController
-@RequestMapping("/events")
+@RequestMapping("events")
 public class EventController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class EventController {
     
  // Αναζήτηση των event βάσει των κριτηρίων
     @GetMapping("/search")
-    public List<Event> searchEvents(@RequestParam(required = true) Long id,
+    public List<Event> searchEvents(@RequestParam(required = false) Long id,
                                      @RequestParam(required = false) Integer day,
                                      @RequestParam(required = false) Integer month,
                                      @RequestParam(required = false) Integer year,
@@ -83,44 +83,53 @@ public class EventController {
 
     // Επιστρέφει τις εκδηλώσεις που έχουν εγκριθεί
     @GetMapping("/approved")
-    public List<Event> getAllApprovedEvents() {
-        return eventServices.getAllApprovedEvents();
+    public String getAllApprovedEvents() {
+        List<Event> approvedEvents = eventServices.getAllApprovedEvents();
+        if (approvedEvents.isEmpty()) {
+            return "Δεν υπάρχουν εγκεκριμένες εκδηλώσεις.";
+        }
+        return approvedEvents.toString(); // Επιστρέφει τα εγκεκριμένα events
     }
+
 
     // Επιστρέφει όλες τις εκδηλώσεις
     @GetMapping("/all")
-    public List<Event> getAllEvents() {
-        return eventServices.getAllEvents();
+    public String getAllEvents() {
+        List<Event> allEvents = eventServices.getAllEvents();
+        if (allEvents.isEmpty()) {
+            return "Δεν υπάρχουν διαθέσιμες εκδηλώσεις.";
+        }
+        return allEvents.toString(); // Επιστρέφει όλα τα events
     }
+
 
     // Επιστρέφει μία εκδήλωση βάσει ID
-    @GetMapping("/id")
-    public ResponseEntity<?> getEventById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public String getEventById(@PathVariable Long id) {
         Event event = eventServices.findEventById(id);
         if (event != null) {
-            return ResponseEntity.ok(event);
+            return event.toString(); // Επιστρέφει το event ως String
         } else {
-            return ResponseEntity.status(404).body("Η εκδήλωση δεν βρέθηκε.");
+            return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
         }
     }
+
+
+
 
     // Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση
-    @GetMapping("/id/availability")
-    public ResponseEntity<String> checkAvailability(@PathVariable Long id) {
-        // Αναζητούμε την εκδήλωση με το συγκεκριμένο ID
+    @GetMapping("/{id}/availability")
+    public String checkAvailability(@PathVariable Long id) {
         Event event = eventServices.findEventById(id);
         if (event == null) {
-            return ResponseEntity.badRequest().body("Η εκδήλωση με το ID " + id + " δεν βρέθηκε.");
+            return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
         }
 
-        // Έλεγχος αν υπάρχουν διαθέσιμες θέσεις
         boolean hasSeats = reservationServices.hasAvailableSeats(event);
-
         if (hasSeats) {
-            return ResponseEntity.ok("Υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.");
+            return "Υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
         }
 
-        return ResponseEntity.badRequest().body("Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.");
+        return "Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
     }
 }
-
