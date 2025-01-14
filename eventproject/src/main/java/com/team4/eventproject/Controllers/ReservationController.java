@@ -68,7 +68,7 @@ public class ReservationController {
 
 	// Επιστρέφει όλες τις κρατήσεις.
 
-	@GetMapping
+	@GetMapping("/all")
 	public List<Reservation> getAllReservations() {
 		return ReservationServices.getAllReservations();
 	}
