@@ -34,7 +34,8 @@ public class ReservationServices {
 				.collect(Collectors.toList());
 	}
 
-	// Δημιουργία κράτησης
+	// Δημιουργία κράτησης για τον επισκέπτη,δίνει μια λεπτομερή αναφορά για την διαδικασία της προσθήκης της κράτησης 
+	
 	public static boolean createReservation(Visitor visitor, Event event) {
 		if (!hasAvailableSeats(event)) {
 			System.out.println("Αποτυχία: Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση: " + event.getTitle());
@@ -111,7 +112,7 @@ public class ReservationServices {
 
 	}
 
-	// Μέθοδος για προσθήκη κράτησης
+	// Μέθοδος που χρησιμοποιείται όταν θέλουμε να αυξήσουμε τον αριθμό κρατήσεων μιας εκδήλωσης
 	public boolean makeReservation(Event event) {
 		if (hasAvailableSeats(event)) {
 			event.setCurrentReservations(event.getCurrentReservations() + 1);
