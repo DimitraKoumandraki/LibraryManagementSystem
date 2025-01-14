@@ -29,9 +29,21 @@ public class ReservationController {
 	// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
 
 	@GetMapping("/by-visitor")
-	public List<Reservation> getReservationsByVisitor(@RequestParam String visitorEmail) {
-		return reservationServices.getReservationsByVisitor(visitorEmail);
+	public ResponseEntity<?> getReservationsByVisitor(@RequestParam(required = false) String visitorEmail) {
+	    if (visitorEmail == null || visitorEmail.isEmpty()) {
+	        return ResponseEntity.badRequest().body("Το email του επισκέπτη είναι υποχρεωτικό.");
+	    }
+
+	    List<Reservation> reservations = reservationServices.getReservationsByVisitor(visitorEmail);
+
+	    if (reservations.isEmpty()) {
+	        return ResponseEntity.ok("Δεν βρέθηκαν κρατήσεις για τον επισκέπτη με email: " + visitorEmail);
+	    }
+
+	    return ResponseEntity.ok(reservations);
 	}
+
+
 
 	// Αναζήτηση κράτησης μέσω ID.
 
