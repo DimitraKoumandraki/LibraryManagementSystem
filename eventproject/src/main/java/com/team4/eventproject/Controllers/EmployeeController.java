@@ -102,12 +102,6 @@ public class EmployeeController {
 		return null;
 	}
 
-	// Μέθοδος για εύρεση εκδήλωσης βάσει ID.
-	//Την δηλώνω τοπικά γιατί εξυπηρετεί την παραπάνω μέθοδο 
-	private Event findEventById(Long eventId) {
-		// Δοκιμή
-		return new Event(1L, " Event1", "Music", "Description", "Location", 100, 1, 1, 2025, 10, 0, 120, null,
-				"Pending");
-	}
-
+	
+	
 }
