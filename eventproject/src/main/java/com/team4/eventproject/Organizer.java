@@ -92,5 +92,16 @@ public class Organizer {
 	public boolean removeEvent(Event event) {
 		return events.remove(event);
 	}
+	  @Override
+	    public String toString() {
+	        return "Organizer{" +
+	                "afm=" + afm +
+	                ", name='" + name + '\'' +
+	                ", surname='" + surname + '\'' +
+	                ", description='" + description + '\'' +
+	                ", events=" + events +
+	                ", id=" + id +
+	                '}';
+	    }
 
 }
