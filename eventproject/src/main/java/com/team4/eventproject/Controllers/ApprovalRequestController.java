@@ -1,36 +1,38 @@
 package com.team4.eventproject.Controllers;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.team4.eventproject.ApprovalRequest;
 import com.team4.eventproject.Services.ApprovalRequestServices;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/approval-requests")
 public class ApprovalRequestController {
 
-    private List<ApprovalRequest> approvalRequests;
+	@Autowired
+	// Η δήλωση αυτή επιτρέπει στην cotroller να καλεί μεθόδους από την services
+	private ApprovalRequestServices approvalRequestServices;
 
-    public ApprovalRequestController() {
-        // Προσθήκη 2 αιτημάτων έγκρισης για τον έλεγχο της λειτουργίας του κώδικα
-        this.approvalRequests = List.of(
-            new ApprovalRequest("add", null, null, null, 1L),
-            new ApprovalRequest("delete", null, null, null, 2L)
-        );
-    }
+//Επιστρέφει όλα τα αιτήματα έγκρισης.
+	@GetMapping("/all")
+	public ResponseEntity<List<ApprovalRequest>> getAllRequests() {
+		List<ApprovalRequest> requests = approvalRequestServices.getAllRequests();
+		return ResponseEntity.ok(requests);
+	}
 
-    @GetMapping("/approvalRequest/id/{id}")
-    public String findById(@PathVariable Long id) {
+	// Αναζητά ένα αίτημα μέσω του ID του.
+	@GetMapping("/approvalRequest/id/{id}")
+	public String findById(@PathVariable Long id) {
 
-    	ApprovalRequest approval = ApprovalRequestServices.findById(approvalRequests, id);
-        if (approval != null) {
-            return approval.toString();
-        } else {
-            return "Το αίτημα έγκρισης με ID " + id + " δεν βρέθηκε.";
-        }
-    }
+		ApprovalRequest approval = ApprovalRequestServices.findById(approvalRequestServices.getAllRequests(), id);
+		if (approval != null) {
+			return approval.toString();
+		} else {
+			return "Το αίτημα έγκρισης με ID " + id + " δεν βρέθηκε.";
+		}
+	}
 }
-
