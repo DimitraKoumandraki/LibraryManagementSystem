@@ -155,6 +155,23 @@ public class Event {
 		this.currentReservations = currentReservations;
 	}
 
+	@Override
+	public String toString() {
+	    return "Event{" +
+	           "id=" + id +
+	           ", title='" + title + '\'' +
+	           ", theme='" + theme + '\'' +
+	           ", description='" + description + '\'' +
+	           ", location='" + location + '\'' +
+	           ", maxCapacity=" + maxCapacity +
+	           ", date=" + day + "/" + month + "/" + year +
+	           ", time=" + hour + ":" + (minutes < 10 ? "0" + minutes : minutes) +
+	           ", duration=" + duration + " minutes" +
+	           ", organizer=" + (organizer != null ? organizer.getName() : "Unknown") +
+	           ", status='" + status + '\'' +
+	           ", currentReservations=" + currentReservations +
+	           '}';
+	}
 
 	
 }
