@@ -76,10 +76,14 @@ public class ReservationServices {
 				+ event.getTitle());
 		return false;
 	}
-	
-	
+
+	// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
+	/*
+	 * Διατρέχει τη λίστα κρατήσεων. Βρίσκει τις κρατήσεις που σχετίζονται με αυτό
+	 * το Event. Ενημερώνει την κατάστασή τους σε "Deactivated".
+	 */
 	private void updateReservationsForDeactivatedEvent(Event event) {
-		// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
+
 		for (Reservation reservation : ReservationServices.getAllReservations()) {
 			if (reservation.getEvent().equals(event)) {
 				reservation.setStatus("Deactivated");
