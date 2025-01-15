@@ -7,12 +7,8 @@ public class Reservation {
 	private String Status; // active/deactivated
 
 	
-	//constructor για την δηιουργια κρατησης με εναν visitor και ενα event
-	public Reservation(Visitor visitor, Event event) {
-		this.visitor = visitor;
-		this.event = event;
 	
-	}
+
 	//constructor για να ορισουμε και το id της κρατησης
     public Reservation(Visitor visitor, Event event, Long id) {
         this.visitor = visitor;
@@ -22,6 +18,9 @@ public class Reservation {
     }
     
 
+	public void setStatus(String status) {
+		this.Status = status;
+	}
 	public String getStatus() {
 		return Status;
 	}
@@ -50,9 +49,14 @@ public class Reservation {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setStatus(String status2) {
-		// TODO Auto-generated method stub
-		
-	}
+	@Override
+    public String toString() {
+        return "Reservation{" +
+               "id=" + id +
+               ", visitor=" + visitor +
+               ", event=" + event +
+               ", status='" + Status + '\'' +
+               '}';
+    }
 
 }

@@ -54,15 +54,15 @@ public class ReservationController {
 
 	// Αναζήτηση κράτησης μέσω ID.
 
-	@GetMapping("/id/{id}")
-	public ResponseEntity<?> findReservationById(@PathVariable Long id) {
-	    Reservation reservation = reservationServices.findReservationById(id);
-	    if (reservation != null) {
-	        return ResponseEntity.ok(reservation);
-	    } else {
-	        return ResponseEntity.badRequest().body("Η κράτηση με ID " + id + " δεν βρέθηκε.");
+	 @GetMapping("/id/{id}")
+	    public String findReservationById(@PathVariable Long id) {
+	        Reservation reservation = reservationServices.findReservationById(id);
+	        if (reservation != null) {
+	            return reservation.toString();
+	        } else {
+	            return "Η κράτηση με ID " + id + " δεν βρέθηκε.";
+	        }
 	    }
-	}
 
 
 	// Δημιουργεί μία νέα κράτηση.

@@ -10,22 +10,29 @@ import com.team4.eventproject.Reservation;
 import com.team4.eventproject.Visitor;
 import java.util.stream.Collectors;
 
+import com.team4.eventproject.Organizer;  // Προσθέτουμε την κλάση Organizer
+
 @Service
 public class ReservationServices {
 
-	private static List<Reservation> reservations = new ArrayList<>();
+    private static List<Reservation> reservations = new ArrayList<>();
+    
+ // Δεδομένα κρατήσεων για δοκιμή
+    private static Organizer organizer1;  
+    public ReservationServices() {
+        reservations = new ArrayList<>();
+        
+        organizer1 = new Organizer();  
+       
+        reservations.add(new Reservation(
+            new Visitor("Dimitra", "koum", "jDimitrakoum@example.com", 3L), 
+            new Event(3L, "Rock Night", "Rock", "A thrilling rock concert", 
+                      "Stadium A", 800, 2, 7, 2025, 21, 0, 150, organizer1, "Active"),1L)
+        );
+        
+   
+    }
 
-	public ReservationServices() {
-		reservations = new ArrayList<>();
-		// Δεδομένα κρατήσεων για δοκιμή
-		reservations.add(new Reservation(new Visitor("John", "Doe", "john.doe@example.com", 1L),
-				new Event(1L, "Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
-						"Thessaloniki International Fair", 500, 8, 3, 2025, 8, 30, 160, null, "Pending")));
-		reservations.add(new Reservation(new Visitor("Jane", "Smith", "jane.smith@example.com", 2L),
-				new Event(2L, "Wine Tasting - Local Vineyards", "Culinary",
-						"Discover the finest wines from local vineyards.", " Thessaloniki Wine Cellar", 200, 15, 5,
-						2025, 10, 0, 120, null, "Approved")));
-	}
 
 	// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
 	public List<Reservation> getReservationsByVisitor(String visitorEmail) {
@@ -52,7 +59,7 @@ public class ReservationServices {
 
 		// Αν δεν υπήρξε κράτηση, προσθέτουμε μια νέα κράτηση
 		event.setCurrentReservations(event.getCurrentReservations() + 1);
-		Reservation newReservation = new Reservation(visitor, event);
+		Reservation newReservation = new Reservation(visitor, event, null);
 		reservations.add(newReservation);
 
 		return true; // Η κράτηση ολοκληρώθηκε επιτυχώς
@@ -128,12 +135,19 @@ public class ReservationServices {
 	// reservationId που δίνεται ως είσοδος.
 	// Επιστρέφει το αντικείμενο Reservation αν βρεθεί.
 	public Reservation findReservationById(Long reservationId) {
-		for (Reservation reservation : reservations) {
-			if (reservation.getId().equals(reservationId)) {
-				return reservation; // Επιστροφή της κράτησης αν βρεθεί
-			}
-		}
-		System.out.println("Η κράτηση με ID " + reservationId + " δεν βρέθηκε.");
-		return null; // Επιστροφή null αν δεν βρεθεί κράτηση
+	    if (reservations == null || reservations.isEmpty()) {
+	        System.out.println("Η λίστα κρατήσεων είναι κενή ή δεν έχει αρχικοποιηθεί.");
+	        return null;
+	    }
+
+	    for (Reservation reservation : reservations) {
+	        if (reservation.getId().equals(reservationId)) {
+	            return reservation; // Επιστροφή της κράτησης αν βρεθεί
+	        }
+	    }
+	    System.out.println("Η κράτηση με ID " + reservationId + " δεν βρέθηκε.");
+	    return null; // Επιστροφή null αν δεν βρεθεί κράτηση
 	}
+
 }
+
