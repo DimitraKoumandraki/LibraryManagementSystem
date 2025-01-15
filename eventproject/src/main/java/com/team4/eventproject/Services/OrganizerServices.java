@@ -34,7 +34,7 @@ public class OrganizerServices {
 		this.organizer = organizer;
 	}
 
-	// Έγκριση για την δημιουργία της
+	// Έγκριση για την δημιουργία της εδήλωσης
 	public ApprovalRequest requestAddEvent(Event event) {
 		System.out.println("Ο οργανωτής " + organizer.getName() + " ζήτησε έγκριση για τη δημιουργία της εκδήλωσης "
 				+ event.getTitle());
