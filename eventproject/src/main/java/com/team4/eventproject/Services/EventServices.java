@@ -15,7 +15,7 @@ public class EventServices {
 
 	public EventServices() {
 
-		// προσθήkη 2 events για τον έλεγχο της λειτουργίας του κώδικα
+		// προσθήκη 2 events για τον έλεγχο της λειτουργίας του κώδικα
 		Organizer organizer1 = new Organizer(12345678, "John", "Doe", "Music event organizer", 1L);
 
 		Event event1 = new Event(1L, "Concert at the Park", "Music", "Enjoy an evening of live music", "Central Park",

@@ -79,7 +79,7 @@ public class EmployeeController {
 	@DeleteMapping("/delete-event")
 	public ResponseEntity<String> deleteEventDirectly(
 	       @RequestBody Event event,//Η εκδήλωση που θέλουμε να διαγράψουμε.
-	        @RequestParam Long organizerId,//Το ID του διοργανωτή της εκδήλωσης.
+	        @RequestParam Long organizerId,
 	        @RequestBody Employee employee)// Ο υπάλληλος που εκτελεί τη διαγραφή.
 	{
 
@@ -106,6 +106,5 @@ public class EmployeeController {
 		return null;
 	}
 
-	
 	
 }

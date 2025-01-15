@@ -14,7 +14,7 @@ public class EmployeeServices {
 	static List<Employee> employees = new ArrayList<>();
 
 	public EmployeeServices() {
-        // Προσθήκη mock δεδομένων
+        // Προσθήκη 3 εργαζομένων για τον έλεγχο της λειτουργίας του κώδικα
         Employee employee1 = new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com", 1L);
         Employee employee2 = new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com", 2L);
         Employee employee3 = new Employee("Νίκος", "Αντωνίου", "nikos.antoniou@example.com", 3L);
@@ -43,7 +43,7 @@ public class EmployeeServices {
 	            return employee; // Επιστροφή του υπαλλήλου αν βρεθεί
 	        }
 	    }
-	    return null; // Επιστροφή null αν δεν βρεθεί υπάλληλος
+	    return null; 
 	}
 
 
@@ -52,10 +52,8 @@ public class EmployeeServices {
 		employees.add(employee);
 	}
 
-	// Λίστα εκκρεμών αιτημάτων
 	private List<ApprovalRequest> pendingRequests = new ArrayList<>();
 
-	// Προσθήκη αιτήματος στη λίστα
 	public void addRequest(ApprovalRequest request) {
 		pendingRequests.add(request);
 	}

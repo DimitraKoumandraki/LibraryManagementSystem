@@ -1,8 +1,6 @@
 package com.team4.eventproject;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ApprovalRequest {
 	private String type; // Ο τύπος είναι "add" ή "delete"
@@ -20,17 +18,15 @@ public class ApprovalRequest {
 		this.event = event;
 		this.submittedBy = submittedBy;
 		this.createdAt = createdAt;
-		this.status = "pending"; // Αρχική κατάσταση
+		this.status = "pending";
 		this.handledBy = null;
 		this.closedAt = null;
 		this.comments = "";
 		this.id = id;
 	}
 
-	// Getters και Setters
-
 	public ApprovalRequest(String string, Event event2, Organizer organizer, LocalDateTime now) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getType() {
@@ -113,16 +109,19 @@ public class ApprovalRequest {
 		this.closedAt = LocalDateTime.now();
 	}
 	
-	//Αναζητά ένα Approval Request μέσω id από την λίστα
-
-	public static ApprovalRequest findById(List<ApprovalRequest> requests, Long id) {
-		for (ApprovalRequest request : requests) {
-			if (request.getId().equals(id)) {
-				return request; // Επιστρέφει το αίτημα αν βρεθεί
-			}
-		}
-		System.out.println("Το αίτημα με ID " + id + " δεν βρέθηκε.");
-		return null; // Επιστρέφει null αν δεν βρεθεί το αίτημα
+	@Override
+	public String toString() {
+	    return "ApprovalRequest{" +
+	           "id=" + id +
+	           ", type='" + type + '\'' +
+	           ", event=" + event +
+	           ", submittedBy=" + submittedBy +
+	           ", createdAt=" + createdAt +
+	           ", status='" + status + '\'' +
+	           ", handledBy=" + handledBy +
+	           ", closedAt=" + closedAt +
+	           ", comments='" + comments + '\'' +
+	           '}';
 	}
 
 }
