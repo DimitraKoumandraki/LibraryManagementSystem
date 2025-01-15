@@ -17,7 +17,7 @@ public class ReservationServices {
 
 	public ReservationServices() {
 		reservations = new ArrayList<>();
-		// Mock δεδομένα κρατήσεων
+		// Δεδομένα κρατήσεων για δοκιμή
 		reservations.add(new Reservation(new Visitor("John", "Doe", "john.doe@example.com", 1L),
 				new Event(1L, "Robotics Workshop", "Technology", "Learn the basics of building and programming robots.",
 						"Thessaloniki International Fair", 500, 8, 3, 2025, 8, 30, 160, null, "Pending")));
@@ -75,17 +75,6 @@ public class ReservationServices {
 		System.out.println("Αποτυχία: Δεν υπάρχει κράτηση για τον επισκέπτη " + visitor.getName() + " στην εκδήλωση: "
 				+ event.getTitle());
 		return false;
-	}
-
-	private void updateReservationsForDeactivatedEvent(Event event) {
-		// Ενημέρωση των κρατήσεων για το απενεργοποιημένο event
-		for (Reservation reservation : ReservationServices.getAllReservations()) {
-			if (reservation.getEvent().equals(event)) {
-				reservation.setStatus("Deactivated");
-				System.out.println("Η κράτηση του επισκέπτη " + reservation.getVisitor().getEmail()
-						+ " για την εκδήλωση " + event.getTitle() + " έχει ακυρωθεί.");
-			}
-		}
 	}
 
 	// Προβολή όλων των κρατήσεων

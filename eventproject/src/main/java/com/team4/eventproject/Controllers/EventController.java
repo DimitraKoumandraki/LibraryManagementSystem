@@ -18,109 +18,88 @@ import com.team4.eventproject.Services.ReservationServices;
 @RequestMapping("/events")
 public class EventController {
 
-    @Autowired
-    private EventServices eventServices;
+	@Autowired
+	private EventServices eventServices;
 
+	// Αναζήτηση των event βάσει των κριτηρίων
+	@GetMapping("/search")
+	public List<Event> searchEvents(@RequestParam(required = false) Integer day,
+			@RequestParam(required = false) Integer month, @RequestParam(required = false) Integer year,
+			@RequestParam(required = false) String location, @RequestParam(required = false) String theme) {
+
+		List<Event> allEvents = eventServices.getAllEvents();
+		List<Event> EventsAfterFilter = new ArrayList<>();
+
+		for (Event event : allEvents) {
+			boolean matches = false;
+
+			// Έλεγχος για την ημέρα του event
+			if (day != null && event.getDay().equals(day)) {
+				matches = true;
+			}
+
+			// Έλεγχος για τον μήνα
+			if (month != null && event.getMonth().equals(month)) {
+				matches = true;
+			}
+
+			// Έλεγχος για το έτος
+			if (year != null && event.getYear().equals(year)) {
+				matches = true;
+			}
+
+			// Έλεγχος για την τοποθεσία
+			if (location != null && event.getLocation().equalsIgnoreCase(location)) {
+				matches = true;
+			}
+
+			// Έλεγχος για το θέμα
+			if (theme != null && event.getTheme().equalsIgnoreCase(theme)) {
+				matches = true;
+			}
+
+			// Αν υπάρχει ταύτιση, προσθήκη στη λίστα
+			if (matches) {
+				EventsAfterFilter.add(event);
+			}
+		}
+
+		return EventsAfterFilter;
+	}
+
+	// Επιστρέφει τις εκδηλώσεις που έχουν εγκριθεί
+	@GetMapping("/approved")
+	public String getAllApprovedEvents() {
+		List<Event> approvedEvents = eventServices.getAllApprovedEvents();
+		if (approvedEvents.isEmpty()) {
+			return "Δεν υπάρχουν εγκεκριμένες εκδηλώσεις.";
+		}
+		return approvedEvents.toString(); // Επιστρέφει τα εγκεκριμένα events
+	}
+
+	// Επιστρέφει όλες τις εκδηλώσεις
+	@GetMapping("/all")
+	public String getAllEvents() {
+		List<Event> allEvents = eventServices.getAllEvents();
+		if (allEvents == null || allEvents.isEmpty()) {
+			return "Δεν υπάρχουν διαθέσιμες εκδηλώσεις.";
+		}
+		return allEvents.toString();
+	}
+
+	// Επιστρέφει μία εκδήλωση βάσει ID
+	@GetMapping("/{id}")
+	public String getEventById(@PathVariable Long id) {
+		Event event = EventServices.findEventById(id);
+		if (event != null) {
+			return event.toString(); // Επιστρέφει το event ως String
+		} else {
+			return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
+		}
+	}
    
-    
- // Αναζήτηση των event βάσει των κριτηρίων
-    @GetMapping("/search")
-    public List<Event> searchEvents(@RequestParam(required = false) Integer day,
-                                     @RequestParam(required = false) Integer month,
-                                     @RequestParam(required = false) Integer year,
-                                     @RequestParam(required = false) String location,
-                                     @RequestParam(required = false) String theme) {
-
-        List<Event> allEvents = eventServices.getAllEvents();
-        List<Event> EventsAfterFilter = new ArrayList<>();
-
-        for (Event event : allEvents) {
-            boolean matches = false;
-
-            // Έλεγχος για την ημέρα του event
-            if (day != null && event.getDay().equals(day)) {
-                matches = true;
-            }
-
-            // Έλεγχος για τον μήνα
-            if (month != null && event.getMonth().equals(month)) {
-                matches = true;
-            }
-
-            // Έλεγχος για το έτος
-            if (year != null && event.getYear().equals(year)) {
-                matches = true;
-            }
-
-            // Έλεγχος για την τοποθεσία
-            if (location != null && event.getLocation().equalsIgnoreCase(location)) {
-                matches = true;
-            }
-
-            // Έλεγχος για το θέμα
-            if (theme != null && event.getTheme().equalsIgnoreCase(theme)) {
-                matches = true;
-            }
-
-            // Αν υπάρχει ταύτιση, προσθήκη στη λίστα
-            if (matches) {
-                EventsAfterFilter.add(event);
-            }
-        }
-
-        return EventsAfterFilter;
-    }
-
-
-    // Επιστρέφει τις εκδηλώσεις που έχουν εγκριθεί
-    @GetMapping("/approved")
-    public String getAllApprovedEvents() {
-        List<Event> approvedEvents = eventServices.getAllApprovedEvents();
-        if (approvedEvents.isEmpty()) {
-            return "Δεν υπάρχουν εγκεκριμένες εκδηλώσεις.";
-        }
-        return approvedEvents.toString(); // Επιστρέφει τα εγκεκριμένα events
-    }
-
-
-    // Επιστρέφει όλες τις εκδηλώσεις
-    @GetMapping("/all")
-    public String getAllEvents() {
-        List<Event> allEvents = eventServices.getAllEvents();
-        if (allEvents == null || allEvents.isEmpty()) {
-            return "Δεν υπάρχουν διαθέσιμες εκδηλώσεις.";
-        }
-        return allEvents.toString();
-    }
-
-
-
-    // Επιστρέφει μία εκδήλωση βάσει ID
-    @GetMapping("/{id}")
-    public String getEventById(@PathVariable Long id) {
-        Event event = EventServices.findEventById(id);
-        if (event != null) {
-            return event.toString(); // Επιστρέφει το event ως String
-        } else {
-            return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
-        }
-    }
-
-
-
-    // Επιστρέφει αν υπάρχουν διαθέσιμες θέσεις για μία εκδήλωση
-    @GetMapping("/{id}/availability")
-    public String checkAvailability(@PathVariable Long id) {
-        Event event = EventServices.findEventById(id);
-        if (event == null) {
-            return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
-        }
-
-        boolean hasSeats = ReservationServices.hasAvailableSeats(event);
-        if (hasSeats) {
-            return "Υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
-        }
-
-        return "Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
-    }
+	@GetMapping("/{id}/availability")
+	public String checkAvailability(@PathVariable Long id) {
+		return eventServices.checkAvailability(id);
+	}
 }

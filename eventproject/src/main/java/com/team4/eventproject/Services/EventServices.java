@@ -11,36 +11,34 @@ import com.team4.eventproject.Organizer;
 @Service
 public class EventServices {
 
-
-	 static List<Event> events = new ArrayList<>();
+	static List<Event> events = new ArrayList<>();
 
 	public EventServices() {
 
 		// προσθήkη 2 events για τον έλεγχο της λειτουργίας του κώδικα
-		Organizer organizer1 = new Organizer(12345678, "John", "Doe", "Music event organizer",  1L);
-		
+		Organizer organizer1 = new Organizer(12345678, "John", "Doe", "Music event organizer", 1L);
 
-		Event event1 = new Event(1L, "Concert at the Park", "Music", "Enjoy an evening of live music", "Central Park", 500, 15, 6, 2025, 20, 30, 120, organizer1, "Active");
-		Event event2 = new Event(2L, "Rock Night", "Rock", "A thrilling rock concert", "Stadium A", 800, 2, 7, 2025, 21, 0, 150, organizer1, "Active");
+		Event event1 = new Event(1L, "Concert at the Park", "Music", "Enjoy an evening of live music", "Central Park",
+				500, 15, 6, 2025, 20, 30, 120, organizer1, "Active");
+		Event event2 = new Event(2L, "Rock Night", "Rock", "A thrilling rock concert", "Stadium A", 800, 2, 7, 2025, 21,
+				0, 150, organizer1, "Active");
 
-		
 		events.add(event1);
 		events.add(event2);
 
-		organizer1.setEvents(events);  // Συνδέουμε τα events με τον οργανωτή
+		organizer1.setEvents(events); // Συνδέουμε τα events με τον οργανωτή
 	}
 
 	// Επιστρέφει τις εκδηλώσεις που έχουν εκγριθεί
 	public List<Event> getAllApprovedEvents() {
-	    List<Event> approvedEvents = new ArrayList<>();
-	    for (Event event : events) {
-	        if ("Approved".equalsIgnoreCase(event.getStatus())) {
-	            approvedEvents.add(event);
-	        }
-	    }
-	    return approvedEvents;
+		List<Event> approvedEvents = new ArrayList<>();
+		for (Event event : events) {
+			if ("Approved".equalsIgnoreCase(event.getStatus())) {
+				approvedEvents.add(event);
+			}
+		}
+		return approvedEvents;
 	}
-
 
 	// Επιστρέφει όλεςτις εκδηλώσεις
 	public List<Event> getAllEvents() {
@@ -49,12 +47,12 @@ public class EventServices {
 
 	// Μέθοδος για αναζήτηση εκδήλωσης μέσω ID
 	public static Event findEventById(Long eventId) {
-	    for (Event event : events) {
-	        if (event.getId() != null && event.getId().equals(eventId)) {
-	            return event;
-	        }
-	    }
-	    return null; // Επιστρέφει null αν δεν βρεθεί το event
+		for (Event event : events) {
+			if (event.getId() != null && event.getId().equals(eventId)) {
+				return event;
+			}
+		}
+		return null; // Επιστρέφει null αν δεν βρεθεί το event
 	}
 
 	/*
@@ -89,5 +87,20 @@ public class EventServices {
 			}
 		}
 		return result;
+	}
+
+	//  Ελέγχει αν υπάρχει το event βάσει του id και στη συνέχεια καλεί την hasAvailableSeats για να ελέγξει αν υπάρχουν θέσεις.
+	public String checkAvailability(Long id) {
+		Event event = findEventById(id);
+		if (event == null) {
+			return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
+		}
+
+		boolean hasSeats = ReservationServices.hasAvailableSeats(event);
+		if (hasSeats) {
+			return "Υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
+		}
+
+		return "Δεν υπάρχουν διαθέσιμες θέσεις για την εκδήλωση '" + event.getTitle() + "'.";
 	}
 }
