@@ -29,15 +29,16 @@ public class VisitorControllers {
 
 	// Αναζήτηση επισκέπτη μέσω ID.
 
-	@GetMapping("/id")
-	public ResponseEntity<?> findVisitorById(@PathVariable Long id) {
-		Visitor visitor = visitorServices.findVisitorById(id);
-		if (visitor != null) {
-			return ResponseEntity.ok(visitor);
-		} else {
-			return ResponseEntity.badRequest().body("Ο επισκέπτης με ID " + id + " δεν βρέθηκε.");
-		}
+	@GetMapping("/id/{id}")
+	public String findVisitorById(@PathVariable Long id) {
+	    Visitor visitor = visitorServices.findVisitorById(id); 
+	    if (visitor != null) {
+	        return visitor.toString(); 
+	    } else {
+	        return "Ο επισκέπτης με ID " + id + " δεν βρέθηκε.";
+	    }
 	}
+
 
 	// Προσθέτει έναν νέο επισκέπτη
 

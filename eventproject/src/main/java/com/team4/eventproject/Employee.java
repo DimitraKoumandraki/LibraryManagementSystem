@@ -10,7 +10,6 @@ public class Employee {
 	private String email;
 	 private Long id;
 
-	
 
 	public Employee(String name, String surname, String email,Long id) {
 		
@@ -52,9 +51,19 @@ public class Employee {
 		this.email = email;
 	}
 
-	public Object getId() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long getId() {
+	    return this.id;
 	}
+
 	
+	@Override
+	public String toString() {
+	    return "Employee{" +
+	           "id=" + id +
+	           ", name='" + name + '\'' +
+	           ", surname='" + surname + '\'' +
+	           ", email='" + email + '\'' +
+	           '}';
+	}
+
    }  

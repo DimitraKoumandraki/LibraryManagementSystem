@@ -8,6 +8,7 @@ import com.team4.eventproject.ApprovalRequest;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
 import com.team4.eventproject.Services.EmployeeServices;
+import com.team4.eventproject.Services.EventServices;
 import com.team4.eventproject.Employee;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,20 +29,23 @@ public class EmployeeController {
 	public List<Employee> getAllEmployees() {
 		return employeeServices.getAllEmployees();
 	}
+	
 
 	// Αναζήτηση υπαλλήλου μέσω ID.
-	@GetMapping("/id")
-	public ResponseEntity<?> findEmployeeById(@PathVariable Long id) {
-		Employee employee = employeeServices.findEmployeeById(id);
-		if (employee != null) {
-			return ResponseEntity.ok(employee);
-		} else {
-			return ResponseEntity.badRequest().body("Ο υπάλληλος με " + id + " δεν βρέθηκε.");
-		}
+	@GetMapping("/id/{id}")
+	public String findEmployeeById(@PathVariable Long id) {
+	    Employee employee = EmployeeServices.findEmployeeById(id); 
+	    if (employee != null) {
+	        return employee.toString();
+	    } else {
+	        return "Ο υπάλληλος με ID " + id + " δεν βρέθηκε.";
+	    }
 	}
 
+	
+
 	// Προσθήκη υπαλλήλου.
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
 		employeeServices.addEmployee(employee);
 		return ResponseEntity.ok("Ο υπάλληλος προστέθηκε με επιτυχία.");

@@ -11,19 +11,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeServices {
+	static List<Employee> employees = new ArrayList<>();
 
-	// Δήλωση της λίστας υπαλλήλων
-	private List<Employee> employees;
-
-	// Constructor για την αρχικοποίηση
 	public EmployeeServices() {
-		employees = new ArrayList<>(); // Αρχικοποίηση της λίστας
+        // Προσθήκη mock δεδομένων
+        Employee employee1 = new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com", 1L);
+        Employee employee2 = new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com", 2L);
+        Employee employee3 = new Employee("Νίκος", "Αντωνίου", "nikos.antoniou@example.com", 3L);
 
-		// Προσθήκη mock δεδομένων
-		employees.add(new Employee("Γιώργος", "Παπαδόπουλος", "george.papadopoulos@example.com", 1L));
-		employees.add(new Employee("Μαρία", "Κωνσταντίνου", "maria.konstantinou@example.com", 2L));
-		employees.add(new Employee("Νίκος", "Αντωνίου", "nikos.antoniou@example.com", 3L));
-	}
+        employees.add(employee1);
+        employees.add(employee2);
+        employees.add(employee3);
+    }
+
+	
 
 	// Μέθοδος για την επιστροφή όλων των υπαλλήλων
 	public List<Employee> getAllEmployees() {
@@ -31,15 +32,20 @@ public class EmployeeServices {
 	}
 
 	// Αναζήτηση υπαλλήλου μέσω ID
-	public Employee findEmployeeById(Long id) {
-		for (Employee employee : employees) {
-			if (employee.getId().equals(id)) {
-				return employee; // Επιστροφή του υπαλλήλου αν βρεθεί
-			}
-		}
-		System.out.println("Ο υπάλληλος με ID " + id + " δεν βρέθηκε.");
-		return null; // Επιστροφή null αν δεν βρεθεί υπάλληλος
+	public static Employee findEmployeeById(Long employeeid) {
+	    if (employees == null || employees.isEmpty()) {
+	        System.out.println("Employee list is empty or not initialized!");
+	        return null;
+	    }
+
+	    for (Employee employee : employees) {
+	        if (employee.getId().equals(employeeid)) {
+	            return employee; // Επιστροφή του υπαλλήλου αν βρεθεί
+	        }
+	    }
+	    return null; // Επιστροφή null αν δεν βρεθεί υπάλληλος
 	}
+
 
 	// Μέθοδος για την προσθήκη νέου υπαλλήλου
 	public void addEmployee(Employee employee) {
