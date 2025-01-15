@@ -32,28 +32,18 @@ public class EventController {
 
 		for (Event event : allEvents) {
 			boolean matches = false;
-
-			// Έλεγχος για την ημέρα του event
 			if (day != null && event.getDay().equals(day)) {
 				matches = true;
 			}
-
-			// Έλεγχος για τον μήνα
 			if (month != null && event.getMonth().equals(month)) {
 				matches = true;
 			}
-
-			// Έλεγχος για το έτος
 			if (year != null && event.getYear().equals(year)) {
 				matches = true;
 			}
-
-			// Έλεγχος για την τοποθεσία
 			if (location != null && event.getLocation().equalsIgnoreCase(location)) {
 				matches = true;
 			}
-
-			// Έλεγχος για το θέμα
 			if (theme != null && event.getTheme().equalsIgnoreCase(theme)) {
 				matches = true;
 			}
@@ -74,7 +64,7 @@ public class EventController {
 		if (approvedEvents.isEmpty()) {
 			return "Δεν υπάρχουν εγκεκριμένες εκδηλώσεις.";
 		}
-		return approvedEvents.toString(); // Επιστρέφει τα εγκεκριμένα events
+		return approvedEvents.toString(); 
 	}
 
 	// Επιστρέφει όλες τις εκδηλώσεις
@@ -92,7 +82,7 @@ public class EventController {
 	public String getEventById(@PathVariable Long id) {
 		Event event = EventServices.findEventById(id);
 		if (event != null) {
-			return event.toString(); // Επιστρέφει το event ως String
+			return event.toString(); 
 		} else {
 			return "Η εκδήλωση με ID " + id + " δεν βρέθηκε.";
 		}

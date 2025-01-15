@@ -40,7 +40,7 @@ public class EventServices {
 		return approvedEvents;
 	}
 
-	// Επιστρέφει όλεςτις εκδηλώσεις
+	// Επιστρέφει όλες τις εκδηλώσεις
 	public List<Event> getAllEvents() {
 		return events;
 	}
@@ -52,7 +52,7 @@ public class EventServices {
 				return event;
 			}
 		}
-		return null; // Επιστρέφει null αν δεν βρεθεί το event
+		return null; 
 	}
 
 	/*
