@@ -60,20 +60,23 @@ public class EmployeeController {
 
 	// Επεξεργάζεται ένα αίτημα.
 	@PostMapping("/process")
+	public ResponseEntity<String> handleApprovalRequest(
+	        @RequestParam Long approvalRequestId,  
+	        @RequestParam String status,           
+	        @RequestParam String comments,         
+	        @RequestParam Long employeeId) {       
+	    try {
+	        // Κλήση της υπηρεσίας για επεξεργασία του αιτήματος
+	        employeeServices.processRequest(approvalRequestId, status, comments, employeeId);
 
-	public ResponseEntity<String> handleApprovalRequest(@RequestBody ApprovalRequest request,
-			@RequestParam String status, @RequestParam String comments, @RequestBody Employee employee) {
-		try {
-			// Κλήση της υπηρεσίας για επεξεργασία του αιτήματος
-			employeeServices.handleApprovalRequest(request, status, comments, employee);
-
-			// Επιστροφή επιτυχίας αν ολοκληρωθεί χωρίς σφάλματα
-			return ResponseEntity.ok("Το αίτημα επεξεργάστηκε επιτυχώς.");
-		} catch (Exception e) {
-			// Επιστροφή σφάλματος αν προκύψει κάποιο πρόβλημα
-			return ResponseEntity.badRequest().body("Λάθος: " + e.getMessage());
-		}
+	        // Αν όλα πάνε καλά, επιστρέφουμε επιτυχία
+	        return ResponseEntity.ok("Το αίτημα επεξεργάστηκε επιτυχώς.");
+	    } catch (Exception e) {
+	        // Αν υπάρχει κάποιο σφάλμα, επιστρέφουμε λάθος μήνυμα
+	        return ResponseEntity.badRequest().body("Λάθος: " + e.getMessage());
+	    }
 	}
+
 
 	// Διαγράφει μια εκδήλωση απευθείας.
 	@DeleteMapping("/delete-event")

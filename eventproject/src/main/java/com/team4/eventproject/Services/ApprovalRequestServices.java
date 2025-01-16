@@ -14,7 +14,7 @@ import com.team4.eventproject.Organizer;
 @Service
 public class ApprovalRequestServices {
 
-	private List<ApprovalRequest> approvalRequests;
+	private static List<ApprovalRequest> approvalRequests;
 
 	public ApprovalRequestServices() {
 
@@ -41,8 +41,8 @@ public class ApprovalRequestServices {
 	}
 
 	// Αναζητά ένα Approval Request μέσω id από τη λίστα που δίνεται ως όρισμα
-	public static ApprovalRequest findById(List<ApprovalRequest> requests, Long id) {
-		for (ApprovalRequest request : requests) {
+	public static ApprovalRequest findById( Long id) {
+		for (ApprovalRequest request : approvalRequests) {
 			if (request.getId().equals(id)) {
 				return request;
 			}

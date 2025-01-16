@@ -74,26 +74,55 @@ public class EmployeeServices {
 
 	// Επεξεργάζεται ένα αίτημα και ενημερώνει την κατάστασή του.
 	// Αφαιρεί το αίτημα από τη λίστα εκκρεμών αιτημάτων μόλις επεξεργαστεί.
-	public void processRequest(ApprovalRequest request, String status, String comments, Employee employee) {
-		handleApprovalRequest(request, status, comments, employee);
-		pendingRequests.remove(request); // Αφαίρεση από τη λίστα εκκρεμών αιτημάτων
+	// Επεξεργάζεται ένα αίτημα δημιουργίας ή διαγραφής εκδηλώσεων
+	public void handleApprovalRequest(Long approvalRequestId, String status, String comments, Long employeeId) {
+	    // Εύρεση του ApprovalRequest και του Employee από τα IDs
+	    ApprovalRequest request = ApprovalRequestServices.findById(approvalRequestId);
+	    Employee employee = findEmployeeById(employeeId);
+
+	    // Έλεγχος αν το αίτημα ή ο υπάλληλος δεν βρέθηκαν
+	    if (request == null) {
+	        throw new IllegalArgumentException("Η αίτηση με ID " + approvalRequestId + " δεν βρέθηκε.");
+	    }
+	    if (employee == null) {
+	        throw new IllegalArgumentException("Ο υπάλληλος με ID " + employeeId + " δεν βρέθηκε.");
+	    }
+
+	    // Ενημέρωση της κατάστασης του αιτήματος
+	    request.closeRequest(status, employee, comments);
+
+	    // Αν το αίτημα εγκρίθηκε, επεξεργαζόμαστε την εκδήλωση
+	    if ("Approved".equalsIgnoreCase(status)) {
+	        if ("Add".equalsIgnoreCase(request.getType())) {
+	            request.getSubmittedBy().addEvent(request.getEvent());
+	        } else if ("Delete".equalsIgnoreCase(request.getType())) {
+	            request.getSubmittedBy().removeEvent(request.getEvent());
+	        }
+	    }
 	}
 
-	// Επεξεργάζεται ένα αίτημα δημιουργίας ή διαγραφής εκδηλώσεων.
+	// Επεξεργάζεται και αφαιρεί το αίτημα από τη λίστα εκκρεμών αιτημάτων
+	public void processRequest(Long approvalRequestId, String status, String comments, Long employeeId) {
+	    // Εύρεση του ApprovalRequest και του Employee από τα IDs
+	    ApprovalRequest request = ApprovalRequestServices.findById(approvalRequestId);
+	    Employee employee = findEmployeeById(employeeId);
 
-	public void handleApprovalRequest(ApprovalRequest request, String status, String comments, Employee employee) {
-		// Ενημέρωση της κατάστασης του αιτήματος
-		request.closeRequest(status, employee, comments);
+	    // Αν το αίτημα ή ο υπάλληλος δεν βρεθούν, πετάμε εξαίρεση
+	    if (request == null) {
+	        throw new IllegalArgumentException("Η αίτηση με ID " + approvalRequestId + " δεν βρέθηκε.");
+	    }
+	    if (employee == null) {
+	        throw new IllegalArgumentException("Ο υπάλληλος με ID " + employeeId + " δεν βρέθηκε.");
+	    }
 
-		// Αν το αίτημα εγκρίθηκε, επεξεργαζόμαστε την εκδήλωση
-		if ("Approved".equalsIgnoreCase(status)) {
-			if ("Add".equalsIgnoreCase(request.getType())) {
-				request.getSubmittedBy().addEvent(request.getEvent());
-			} else if ("Delete".equalsIgnoreCase(request.getType())) {
-				request.getSubmittedBy().removeEvent(request.getEvent());
-			}
-		}
+	    // Επεξεργασία του αιτήματος
+	    handleApprovalRequest(approvalRequestId, status, comments, employeeId);
+
+	    // Αφαίρεση του αιτήματος από τη λίστα εκκρεμών αιτημάτων μετά την επεξεργασία
+	    pendingRequests.remove(request);
 	}
+
+
 
 	// Διαγράφει μία εκδήλωση απευθείας από τη λίστα ενός διοργανωτή.
 	public boolean deleteEventDirectly(Event event, Organizer organizer, Employee employee) {

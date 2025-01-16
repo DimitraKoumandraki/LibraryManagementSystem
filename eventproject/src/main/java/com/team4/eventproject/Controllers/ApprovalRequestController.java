@@ -28,7 +28,7 @@ public class ApprovalRequestController {
 	@GetMapping("/approvalRequest/id/{id}")
 	public String findById(@PathVariable Long id) {
 
-		ApprovalRequest approval = ApprovalRequestServices.findById(approvalRequestServices.getAllRequests(), id);
+		ApprovalRequest approval = ApprovalRequestServices.findById(id);
 		if (approval != null) {
 			return approval.toString();
 		} else {
