@@ -24,38 +24,50 @@ public class EventController {
 	// Αναζήτηση των event βάσει των κριτηρίων
 	@GetMapping("/search")
 	public List<Event> searchEvents(@RequestParam(required = false) Integer day,
-			@RequestParam(required = false) Integer month, @RequestParam(required = false) Integer year,
-			@RequestParam(required = false) String location, @RequestParam(required = false) String theme) {
+	                                 @RequestParam(required = false) Integer month,
+	                                 @RequestParam(required = false) Integer year,
+	                                 @RequestParam(required = false) String location,
+	                                 @RequestParam(required = false) String theme) {
 
-		List<Event> allEvents = eventServices.getAllEvents();
-		List<Event> EventsAfterFilter = new ArrayList<>();
+	    List<Event> allEvents = eventServices.getAllEvents();
+	    List<Event> filteredEvents = new ArrayList<>();
 
-		for (Event event : allEvents) {
-			boolean matches = false;
-			if (day != null && event.getDay().equals(day)) {
-				matches = true;
-			}
-			if (month != null && event.getMonth().equals(month)) {
-				matches = true;
-			}
-			if (year != null && event.getYear().equals(year)) {
-				matches = true;
-			}
-			if (location != null && event.getLocation().equalsIgnoreCase(location)) {
-				matches = true;
-			}
-			if (theme != null && event.getTheme().equalsIgnoreCase(theme)) {
-				matches = true;
-			}
+	    // Έλεγχος αν υπάρχουν διαθέσιμες εκδηλώσεις
+	    if (allEvents == null || allEvents.isEmpty()) {
+	        return filteredEvents; // Επιστροφή κενής λίστας
+	    }
 
-			// Αν υπάρχει ταύτιση, προσθήκη στη λίστα
-			if (matches) {
-				EventsAfterFilter.add(event);
-			}
-		}
+	    // Λούπα για να φιλτράρουμε τις εκδηλώσεις
+	    for (Event event : allEvents) {
+	        boolean matches = true;
 
-		return EventsAfterFilter;
+	        // Έλεγχος για κάθε κριτήριο
+	        if (day != null && !event.getDay().equals(day)) {
+	            matches = false;
+	        }
+	        if (month != null && !event.getMonth().equals(month)) {
+	            matches = false;
+	        }
+	        if (year != null && !event.getYear().equals(year)) {
+	            matches = false;
+	        }
+	        if (location != null && !event.getLocation().equalsIgnoreCase(location)) {
+	            matches = false;
+	        }
+	        if (theme != null && !event.getTheme().equalsIgnoreCase(theme)) {
+	            matches = false;
+	        }
+
+	        // Αν ταιριάζει, προσθέτουμε στη λίστα
+	        if (matches) {
+	            filteredEvents.add(event);
+	        }
+	    }
+
+	    return filteredEvents;
 	}
+
+
 
 	// Επιστρέφει τις εκδηλώσεις που έχουν εγκριθεί
 	@GetMapping("/approved")

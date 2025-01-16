@@ -1,5 +1,5 @@
 package com.team4.eventproject;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +18,8 @@ public class Organizer {
 	private String name;
 	private String surname;
 	private String description;
+	
+	 @JsonIgnore // Αποτρέπει την εμφάνιση την λούπα(events) στο postman 
 	private List<Event> events;
 	private Long id;
 
@@ -103,5 +105,6 @@ public class Organizer {
 	                ", id=" + id +
 	                '}';
 	    }
-
+	  
+	 
 }
