@@ -90,7 +90,7 @@ public class EventController {
 	}
 
 	// Επιστρέφει μία εκδήλωση βάσει ID
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public String getEventById(@PathVariable Long id) {
 		Event event = EventServices.findEventById(id);
 		if (event != null) {
