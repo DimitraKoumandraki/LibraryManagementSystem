@@ -10,29 +10,27 @@ import com.team4.eventproject.Reservation;
 import com.team4.eventproject.Visitor;
 import java.util.stream.Collectors;
 
-import com.team4.eventproject.Organizer;  // Προσθέτουμε την κλάση Organizer
+import com.team4.eventproject.Organizer; // Προσθέτουμε την κλάση Organizer
 
 @Service
 public class ReservationServices {
 
-    private static List<Reservation> reservations = new ArrayList<>();
-    
- // Δεδομένα κρατήσεων για δοκιμή
-    private static Organizer organizer1;  
-    public ReservationServices() {
-        reservations = new ArrayList<>();
-        
-        organizer1 = new Organizer();  
-       
-        reservations.add(new Reservation(
-            new Visitor("Dimitra", "koum", "jDimitrakoum@example.com", 3L), 
-            new Event(3L, "Rock Night", "Rock", "A thrilling rock concert", 
-                      "Stadium A", 800, 2, 7, 2025, 21, 0, 150, organizer1, "Active"),1L)
-        );
-        
-   
-    }
+	private static List<Reservation> reservations = new ArrayList<>();
 
+	// Δεδομένα κρατήσεων για δοκιμή
+	private static Organizer organizer1;
+
+	public ReservationServices() {
+		reservations = new ArrayList<>();
+
+		organizer1 = new Organizer();
+
+		reservations.add(new Reservation(
+				new Visitor("Dimitra", "koum", "jDimitrakoum@example.com", 3L), new Event(3L, "Rock Night", "Rock",
+						"A thrilling rock concert", "Stadium A", 800, 2, 7, 2025, 21, 0, 150, organizer1, "Active"),
+				1L));
+
+	}
 
 	// Επιστρέφει τις κρατήσεις που έχει κάνει ένας επισκέπτης.
 	public List<Reservation> getReservationsByVisitor(String visitorEmail) {
@@ -89,13 +87,13 @@ public class ReservationServices {
 	 * Διατρέχει τη λίστα κρατήσεων. Βρίσκει τις κρατήσεις που σχετίζονται με αυτό
 	 * το Event. Ενημερώνει την κατάστασή τους σε "Deactivated".
 	 */
-	private void updateReservationsForDeactivatedEvent(Event event) {
 
-		for (Reservation reservation : ReservationServices.getAllReservations()) {
-			if (reservation.getEvent().equals(event)) {
+	public void updateReservationsForDeactivatedEvent(Long eventId) {
+		for (Reservation reservation : reservations) {
+			if (reservation.getEvent().getId().equals(eventId)) {
 				reservation.setStatus("Deactivated");
 				System.out.println("Η κράτηση του επισκέπτη " + reservation.getVisitor().getEmail()
-						+ " για την εκδήλωση " + event.getTitle() + " έχει ακυρωθεί.");
+						+ " για την εκδήλωση " + reservation.getEvent().getTitle() + " έχει ακυρωθεί.");
 			}
 		}
 	}
@@ -139,19 +137,18 @@ public class ReservationServices {
 	// reservationId που δίνεται ως είσοδος.
 	// Επιστρέφει το αντικείμενο Reservation αν βρεθεί.
 	public Reservation findReservationById(Long reservationId) {
-	    if (reservations == null || reservations.isEmpty()) {
-	        System.out.println("Η λίστα κρατήσεων είναι κενή ή δεν έχει αρχικοποιηθεί.");
-	        return null;
-	    }
+		if (reservations == null || reservations.isEmpty()) {
+			System.out.println("Η λίστα κρατήσεων είναι κενή ή δεν έχει αρχικοποιηθεί.");
+			return null;
+		}
 
-	    for (Reservation reservation : reservations) {
-	        if (reservation.getId().equals(reservationId)) {
-	            return reservation; // Επιστροφή της κράτησης αν βρεθεί
-	        }
-	    }
-	    System.out.println("Η κράτηση με ID " + reservationId + " δεν βρέθηκε.");
-	    return null; // Επιστροφή null αν δεν βρεθεί κράτηση
+		for (Reservation reservation : reservations) {
+			if (reservation.getId().equals(reservationId)) {
+				return reservation; // Επιστροφή της κράτησης αν βρεθεί
+			}
+		}
+		System.out.println("Η κράτηση με ID " + reservationId + " δεν βρέθηκε.");
+		return null; // Επιστροφή null αν δεν βρεθεί κράτηση
 	}
 
 }
-
