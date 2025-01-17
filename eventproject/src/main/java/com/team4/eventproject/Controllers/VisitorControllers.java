@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.team4.eventproject.Visitor;
@@ -31,14 +30,13 @@ public class VisitorControllers {
 
 	@GetMapping("/id/{id}")
 	public String findVisitorById(@PathVariable Long id) {
-	    Visitor visitor = visitorServices.findVisitorById(id); 
-	    if (visitor != null) {
-	        return visitor.toString(); 
-	    } else {
-	        return "Ο επισκέπτης με ID " + id + " δεν βρέθηκε.";
-	    }
+		Visitor visitor = visitorServices.findVisitorById(id);
+		if (visitor != null) {
+			return visitor.toString();
+		} else {
+			return "Ο επισκέπτης με ID " + id + " δεν βρέθηκε.";
+		}
 	}
-
 
 	// Προσθέτει έναν νέο επισκέπτη
 

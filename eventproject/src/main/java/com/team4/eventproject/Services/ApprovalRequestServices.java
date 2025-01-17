@@ -4,10 +4,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.team4.eventproject.ApprovalRequest;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
 
@@ -41,7 +39,7 @@ public class ApprovalRequestServices {
 	}
 
 	// Αναζητά ένα Approval Request μέσω id από τη λίστα που δίνεται ως όρισμα
-	public static ApprovalRequest findById( Long id) {
+	public static ApprovalRequest findById(Long id) {
 		for (ApprovalRequest request : approvalRequests) {
 			if (request.getId().equals(id)) {
 				return request;

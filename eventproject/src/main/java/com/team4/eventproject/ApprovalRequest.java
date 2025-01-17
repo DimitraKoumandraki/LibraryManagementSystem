@@ -26,7 +26,7 @@ public class ApprovalRequest {
 	}
 
 	public ApprovalRequest(String string, Event event2, Organizer organizer, LocalDateTime now) {
-		
+
 	}
 
 	public String getType() {
@@ -108,20 +108,12 @@ public class ApprovalRequest {
 		this.comments = comments;
 		this.closedAt = LocalDateTime.now();
 	}
-	
+
 	@Override
 	public String toString() {
-	    return "ApprovalRequest{" +
-	           "id=" + id +
-	           ", type='" + type + '\'' +
-	           ", event=" + event +
-	           ", submittedBy=" + submittedBy +
-	           ", createdAt=" + createdAt +
-	           ", status='" + status + '\'' +
-	           ", handledBy=" + handledBy +
-	           ", closedAt=" + closedAt +
-	           ", comments='" + comments + '\'' +
-	           '}';
+		return "ApprovalRequest{" + "id=" + id + ", type='" + type + '\'' + ", event=" + event + ", submittedBy="
+				+ submittedBy + ", createdAt=" + createdAt + ", status='" + status + '\'' + ", handledBy=" + handledBy
+				+ ", closedAt=" + closedAt + ", comments='" + comments + '\'' + '}';
 	}
 
 }

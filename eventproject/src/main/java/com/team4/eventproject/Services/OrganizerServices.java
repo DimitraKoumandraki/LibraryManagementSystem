@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.team4.eventproject.ApprovalRequest;
-import com.team4.eventproject.Employee;
 import com.team4.eventproject.Event;
 import com.team4.eventproject.Organizer;
 
@@ -79,11 +78,11 @@ public class OrganizerServices {
 	public Organizer findOrganizerById(Long organizerId) {
 		for (Organizer organizer : organizers) {
 			if (organizer.getId().equals(organizerId)) {
-				return organizer; // Return the Organizer if found
+				return organizer;
 			}
 		}
 		System.out.println("Ο διοργανωτής με ID " + organizerId + " δεν βρέθηκε.");
-		return null; // Return null if not found
+		return null; 
 	}
 
 	

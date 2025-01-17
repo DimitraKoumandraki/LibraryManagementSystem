@@ -46,6 +46,6 @@ public class VisitorServices {
 				return visitor;
 			}
 		}
-		return null; // Επιστρέφει null αν δεν βρεθεί επισκέπτης
+		return null;
 	}
 }
